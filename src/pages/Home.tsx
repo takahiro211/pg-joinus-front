@@ -43,7 +43,7 @@ function Index() {
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/terms" element={<Terms />} />
-            <Route path="/private" element={<Privacy />} />
+            <Route path="/privacy" element={<Privacy />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
           </Routes>
         </BrowserRouter>
