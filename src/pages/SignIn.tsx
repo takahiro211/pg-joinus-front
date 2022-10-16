@@ -8,7 +8,6 @@ import { email, required } from './modules/form/validation';
 import RFTextField from './modules/form/RFTextField';
 import FormButton from './modules/form/FormButton';
 import FormFeedback from './modules/form/FormFeedback';
-import withRoot from './modules/withRoot';
 
 function SignIn() {
   const [sent, setSent] = React.useState(false);
@@ -102,7 +101,7 @@ function SignIn() {
         </Form>
         <Typography align="center">
           <Link underline="always" href="/forgot-password/">
-            パスワードを忘れた場合
+            パスワードをお忘れの方
           </Link>
         </Typography>
       </AppForm>
@@ -110,4 +109,4 @@ function SignIn() {
   );
 }
 
-export default withRoot(SignIn);
+export default SignIn;

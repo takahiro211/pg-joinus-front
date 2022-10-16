@@ -6,6 +6,7 @@ const ButtonRoot = styled(MuiButton)(({ theme, size }) => ({
   borderRadius: 0,
   fontWeight: theme.typography.fontWeightMedium,
   fontFamily: theme.typography.h1.fontFamily,
+  color: 'white',
   padding: theme.spacing(2, 4),
   fontSize: theme.typography.pxToRem(14),
   boxShadow: 'none',

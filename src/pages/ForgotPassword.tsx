@@ -7,7 +7,6 @@ import { email, required } from './modules/form/validation';
 import RFTextField from './modules/form/RFTextField';
 import FormButton from './modules/form/FormButton';
 import FormFeedback from './modules/form/FormFeedback';
-import withRoot from './modules/withRoot';
 
 function ForgotPassword() {
   const [sent, setSent] = React.useState(false);
@@ -34,7 +33,7 @@ function ForgotPassword() {
       <AppForm>
         <React.Fragment>
           <Typography variant="h3" gutterBottom marked="center" align="center">
-            パスワードを忘れた場合
+            パスワードリセット
           </Typography>
           <Typography variant="body2" align="center">
             {"メールアドレスを入力してください。" +
@@ -86,4 +85,4 @@ function ForgotPassword() {
   );
 }
 
-export default withRoot(ForgotPassword);
+export default ForgotPassword;

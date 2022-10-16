@@ -19,7 +19,7 @@ export default function ProductHero() {
       <img
         style={{ display: 'none' }}
         src={backgroundImage}
-        alt="increase priority"
+        alt="Feel free to join projects"
       />
       <Typography color="inherit" align="center" variant="h2" marked="center">
         Feel free to join projects

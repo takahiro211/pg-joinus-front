@@ -9,7 +9,6 @@ import { email, required } from './modules/form/validation';
 import RFTextField from './modules/form/RFTextField';
 import FormButton from './modules/form/FormButton';
 import FormFeedback from './modules/form/FormFeedback';
-import withRoot from './modules/withRoot';
 
 function SignUp() {
   const [sent, setSent] = React.useState(false);
@@ -122,4 +121,4 @@ function SignUp() {
   );
 }
 
-export default withRoot(SignUp);
+export default SignUp;
