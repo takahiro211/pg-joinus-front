@@ -4,7 +4,6 @@ import ProductSmokingHero from './modules/views/ProductSmokingHero';
 import ProductHero from './modules/views/ProductHero';
 import ProductValues from './modules/views/ProductValues';
 import ProductHowItWorks from './modules/views/ProductHowItWorks';
-import ProductCTA from './modules/views/ProductCTA';
 
 function Index() {
   return (
@@ -13,7 +12,6 @@ function Index() {
       <ProductValues />
       <ProductCategories />
       <ProductHowItWorks />
-      {/* <ProductCTA /> */}
       <ProductSmokingHero />
     </React.Fragment>
   );
