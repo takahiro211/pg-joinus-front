@@ -3,6 +3,8 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import AppBar from '../components/AppBar';
 import Toolbar from '../components/Toolbar';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Container } from '@mui/material';
 
 const rightLink = {
   fontSize: 16,
@@ -14,37 +16,31 @@ function AppAppBar() {
   return (
     <div>
       <AppBar position="fixed">
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Box sx={{ flex: 1 }} />
-          <Link
-            variant="h6"
-            underline="none"
-            color="inherit"
-            href="/"
-            sx={{ fontSize: 24 }}
-          >
-            {'PGJoinUs'}
-          </Link>
-          <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+        <Container maxWidth="xl">
+          <Toolbar sx={{ justifyContent: 'space-between' }}>
+            <Box sx={{ flex: 1 }} />
             <Link
+              variant="h6"
+              underline="none"
               color="inherit"
-              variant="h6"
-              underline="none"
-              href="/sign-in/"
-              sx={rightLink}
+              href="/"
+              sx={{ fontSize: 24 }}
             >
-              {'ログイン'}
+              {'PGJoinUs'}
             </Link>
-            <Link
-              variant="h6"
-              underline="none"
-              href="/sign-up/"
-              sx={{ ...rightLink, color: 'secondary.main' }}
-            >
-              {'新規登録'}
-            </Link>
-          </Box>
-        </Toolbar>
+            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+              <Link
+                color="inherit"
+                variant="h6"
+                underline="none"
+                href="/sign-in/"
+                sx={rightLink}
+              >
+                <MenuIcon />
+              </Link>
+            </Box>
+          </Toolbar>
+        </Container>
       </AppBar>
       <Toolbar />
     </div>
