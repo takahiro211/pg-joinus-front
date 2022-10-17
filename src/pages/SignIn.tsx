@@ -9,6 +9,7 @@ import RFTextField from './modules/form/RFTextField';
 import FormButton from './modules/form/FormButton';
 import FormFeedback from './modules/form/FormFeedback';
 import withRoot from '../withRoot';
+import { FormItems, Labels } from '../utils/Consts';
 
 function SignIn() {
   const [sent, setSent] = React.useState(false);
@@ -35,14 +36,14 @@ function SignIn() {
       <AppForm>
         <React.Fragment>
           <Typography variant="h3" gutterBottom marked="center" align="center">
-            ログイン
+            {Labels.SIGN_IN}
           </Typography>
           <Typography variant="body2" align="center">
             {''}
             <Link
               to="/sign-up/"
             >
-              会員登録がお済みでない方はこちら
+              {Labels.NOT_REGISTERED}
             </Link>
           </Typography>
         </React.Fragment>
@@ -55,11 +56,10 @@ function SignIn() {
             <Box component="form" onSubmit={handleSubmit2} noValidate sx={{ mt: 6 }}>
               <Field
                 autoComplete="email"
-                autoFocus
                 component={RFTextField}
                 disabled={submitting || sent}
                 fullWidth
-                label="Email"
+                label={FormItems.EMAIL}
                 margin="normal"
                 name="email"
                 required
@@ -73,7 +73,7 @@ function SignIn() {
                 required
                 name="password"
                 autoComplete="current-password"
-                label="Password"
+                label={FormItems.PASSWORD}
                 type="password"
                 margin="normal"
               />
@@ -93,14 +93,14 @@ function SignIn() {
                 color="secondary"
                 fullWidth
               >
-                {submitting || sent ? 'ログイン処理中…' : 'ログイン'}
+                {submitting || sent ? Labels.PROGRESS_SIGNIN : Labels.SIGN_IN}
               </FormButton>
             </Box>
           )}
         </Form>
         <Typography align="center">
           <Link to="/forgot-password/">
-            パスワードをお忘れの方
+              {Labels.FORGOT_PASSWORD_USER}
           </Link>
         </Typography>
       </AppForm>

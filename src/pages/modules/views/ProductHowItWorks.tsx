@@ -7,6 +7,8 @@ import Container from '@mui/material/Container';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
 import { Link } from 'react-router-dom';
+import { hideUnderline } from '../../../utils/Styles';
+import { FlowOfJoin, Labels } from '../../../utils/Consts';
 
 const item: SxProps<Theme> = {
   display: 'flex',
@@ -55,13 +57,13 @@ function ProductHowItWorks() {
           }}
         />
         <Typography variant="h4" marked="center" component="h2" sx={{ mb: 14 }}>
-          参加の流れ
+          {Labels.FLOW_OF_JOIN}
         </Typography>
         <div>
           <Grid container spacing={5}>
             <Grid item xs={12} md={4}>
               <Box sx={item}>
-                <Box sx={number}>1.</Box>
+                <Box sx={number}>{FlowOfJoin.LEFT}</Box>
                 <Box
                   component="img"
                   src="/img/productHowItWorks1.svg"
@@ -69,13 +71,13 @@ function ProductHowItWorks() {
                   sx={image}
                 />
                 <Typography variant="h5" align="center">
-                  一覧または検索から興味のあるリポジトリを探します。
+                  {FlowOfJoin.LEFT_DESCRIPTION}
                 </Typography>
               </Box>
             </Grid>
             <Grid item xs={12} md={4}>
               <Box sx={item}>
-                <Box sx={number}>2.</Box>
+                <Box sx={number}>{FlowOfJoin.CENTER}</Box>
                 <Box
                   component="img"
                   src="/img/productHowItWorks2.svg"
@@ -83,13 +85,13 @@ function ProductHowItWorks() {
                   sx={image}
                 />
                 <Typography variant="h5" align="center">
-                  ソースをクローンし開発作業完了後、プルリクエストを作成します。
+                  {FlowOfJoin.CENTER_DESCRIPTION}
                 </Typography>
               </Box>
             </Grid>
             <Grid item xs={12} md={4}>
               <Box sx={item}>
-                <Box sx={number}>3.</Box>
+                <Box sx={number}>{FlowOfJoin.RIGHT}</Box>
                 <Box
                   component="img"
                   src="/img/productHowItWorks3.svg"
@@ -97,21 +99,21 @@ function ProductHowItWorks() {
                   sx={image}
                 />
                 <Typography variant="h5" align="center">
-                  {'プルリクエストが受け入れられ作業内容が無事マージされれば完了です。'}
-                  {'再びPGJoinUsで新しいプロジェクトを探しましょう。'}
+                  {FlowOfJoin.RIGHT_DESCRIPTION}
                 </Typography>
               </Box>
             </Grid>
           </Grid>
         </div>
-        <Link to="sign-up">
+        <Link to="sign-up"
+          style={hideUnderline}>
           <Button
             color="secondary"
             size="large"
             variant="contained"
             sx={{ mt: 8 }}
           >
-            プロジェクトを探す
+            {FlowOfJoin.FIND_PROJECT}
           </Button>
         </Link>
       </Container>

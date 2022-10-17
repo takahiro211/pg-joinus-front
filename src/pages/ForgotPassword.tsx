@@ -8,6 +8,7 @@ import RFTextField from './modules/form/RFTextField';
 import FormButton from './modules/form/FormButton';
 import FormFeedback from './modules/form/FormFeedback';
 import withRoot from '../withRoot';
+import { FormItems, Labels } from '../utils/Consts';
 
 function ForgotPassword() {
   const [sent, setSent] = React.useState(false);
@@ -34,11 +35,10 @@ function ForgotPassword() {
       <AppForm>
         <React.Fragment>
           <Typography variant="h3" gutterBottom marked="center" align="center">
-            パスワードリセット
+              {Labels.FORGOT_PASSWORD}
           </Typography>
           <Typography variant="body2" align="center">
-            {"メールアドレスを入力してください。" +
-              'お送りするリンクよりパスワードリセットを実施してください。'}
+              {Labels.FORGOT_PASSWORD_DESCRIPTION}
           </Typography>
         </React.Fragment>
         <Form
@@ -49,12 +49,11 @@ function ForgotPassword() {
           {({ handleSubmit: handleSubmit2, submitting }) => (
             <Box component="form" onSubmit={handleSubmit2} noValidate sx={{ mt: 6 }}>
               <Field
-                autoFocus
                 autoComplete="email"
                 component={RFTextField}
                 disabled={submitting || sent}
                 fullWidth
-                label="Email"
+                label={FormItems.EMAIL}
                 margin="normal"
                 name="email"
                 required
@@ -76,7 +75,7 @@ function ForgotPassword() {
                 color="secondary"
                 fullWidth
               >
-                {submitting || sent ? '送信中…' : '送信する'}
+                {submitting || sent ? Labels.PROGRESS_SEND : Labels.SEND}
               </FormButton>
             </Box>
           )}

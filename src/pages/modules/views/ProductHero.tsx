@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { Labels } from '../../../utils/Consts';
+import { hideUnderline } from '../../../utils/Styles';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
@@ -20,10 +22,10 @@ export default function ProductHero() {
       <img
         style={{ display: 'none' }}
         src={backgroundImage}
-        alt="Feel free to join projects"
+        alt={Labels.CATCH}
       />
       <Typography color="inherit" align="center" variant="h2" marked="center">
-        Feel free to join projects
+        {Labels.CATCH}
       </Typography>
       <Typography
         color="inherit"
@@ -31,23 +33,23 @@ export default function ProductHero() {
         variant="h5"
         sx={{ mb: 4, mt: 4 }}
       >
-        スキルに応じたGitHubリポジトリをご紹介
+        {Labels.SUBJECT}
       </Typography>
       <Link
         to="/sign-up/"
+        style={hideUnderline}
         >
         <Button
           color="secondary"
           variant="contained"
           size="large"
-          component="a"
           sx={{ minWidth: 200 }}
         >
-          新規会員登録
+          {Labels.SIGN_UP}
         </Button>
       </Link>
       <Typography variant="body2" color="inherit" sx={{ mt: 2 }}>
-        無料の会員登録はこちらから
+        {Labels.SIGN_UP_DESCRIPTION}
       </Typography>
     </ProductHeroLayout>
   );

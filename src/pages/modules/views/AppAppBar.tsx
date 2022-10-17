@@ -4,13 +4,8 @@ import Toolbar from '../components/Toolbar';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Container } from '@mui/material';
 import { Link } from 'react-router-dom';
-
-const appBarLinkText = {
-  textDecoration: "none",
-  fontSize: 24,
-  color: 'inherit',
-  ml: 3,
-};
+import { AppStrings } from '../../../utils/Consts';
+import { appBarLinkText } from '../../../utils/Styles';
 
 function AppAppBar() {
   return (
@@ -25,7 +20,7 @@ function AppAppBar() {
                 to="/"
                 style={appBarLinkText}
               >
-                {'PGJoinUs'}
+                {AppStrings.APP_NAME}
               </Link>
             </h6>
             <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>

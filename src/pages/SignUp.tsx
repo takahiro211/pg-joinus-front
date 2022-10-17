@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 import { Field, Form, FormSpy } from 'react-final-form';
 import Typography from './modules/components/Typography';
@@ -10,12 +9,14 @@ import RFTextField from './modules/form/RFTextField';
 import FormButton from './modules/form/FormButton';
 import FormFeedback from './modules/form/FormFeedback';
 import withRoot from '../withRoot';
+import { FormItems, Labels } from '../utils/Consts';
+import { btnStyle } from '../utils/Styles';
 
 function SignUp() {
   const [sent, setSent] = React.useState(false);
 
   const validate = (values: { [index: string]: string }) => {
-    const errors = required(['firstName', 'lastName', 'email', 'password'], values);
+    const errors = required(['userName', 'email', 'password'], values);
 
     if (!errors.email) {
       const emailError = email(values.email);
@@ -36,11 +37,11 @@ function SignUp() {
       <AppForm>
         <React.Fragment>
           <Typography variant="h3" gutterBottom marked="center" align="center">
-            新規会員登録
+            {Labels.SIGN_UP}
           </Typography>
           <Typography variant="body2" align="center">
             <Link to="/sign-in/">
-              既にアカウントをお持ちの方はこちら
+              {Labels.ALREADY_EXISTS}
             </Link>
           </Typography>
         </React.Fragment>
@@ -51,37 +52,21 @@ function SignUp() {
         >
           {({ handleSubmit: handleSubmit2, submitting }) => (
             <Box component="form" onSubmit={handleSubmit2} noValidate sx={{ mt: 6 }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <Field
-                    autoFocus
-                    component={RFTextField}
-                    disabled={submitting || sent}
-                    autoComplete="given-name"
-                    fullWidth
-                    label="First name"
-                    name="firstName"
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Field
-                    component={RFTextField}
-                    disabled={submitting || sent}
-                    autoComplete="family-name"
-                    fullWidth
-                    label="Last name"
-                    name="lastName"
-                    required
-                  />
-                </Grid>
-              </Grid>
+              <Field
+                component={RFTextField}
+                disabled={submitting || sent}
+                autoComplete="given-name"
+                fullWidth
+                label={FormItems.USER_NAME}
+                name="userName"
+                required
+              />
               <Field
                 autoComplete="email"
                 component={RFTextField}
                 disabled={submitting || sent}
                 fullWidth
-                label="Email"
+                label={FormItems.EMAIL}
                 margin="normal"
                 name="email"
                 required
@@ -93,7 +78,7 @@ function SignUp() {
                 required
                 name="password"
                 autoComplete="new-password"
-                label="Password"
+                label={FormItems.PASSWORD}
                 type="password"
                 margin="normal"
               />
@@ -109,10 +94,12 @@ function SignUp() {
               <FormButton
                 sx={{ mt: 3, mb: 2 }}
                 disabled={submitting || sent}
+                size="large"
                 color="secondary"
                 fullWidth
+                style={btnStyle}
               >
-                {submitting || sent ? '登録処理中…' : '新規会員登録'}
+                {submitting || sent ? Labels.PROGRESS_SIGNUP : Labels.SIGN_UP}
               </FormButton>
             </Box>
           )}

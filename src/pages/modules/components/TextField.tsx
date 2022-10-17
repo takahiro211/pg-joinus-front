@@ -36,7 +36,7 @@ const styles = ({ theme }: { theme: Theme }) => ({
     },
   },
   [`& .${classes.inputBorder}`]: {
-    border: '1px solid #e9ddd0',
+    border: '1px solid #e6f5ec',
     '&:focus': {
       borderColor: theme.palette.secondary.main,
     },

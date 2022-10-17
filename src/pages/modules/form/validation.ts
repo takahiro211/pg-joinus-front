@@ -1,3 +1,5 @@
+import { ErrorMessages } from "../../../utils/Consts";
+
 /**
  * This is a simplified logic.
  * Consider using `import isEmail from 'validator/lib/isEmail'` from
@@ -25,7 +27,7 @@ export function required(
   return requiredFields.reduce(
     (fields, field) => ({
       ...fields,
-      ...(isDirty(values[field]) ? undefined : { [field]: 'Required' }),
+      ...(isDirty(values[field]) ? undefined : { [field]: ErrorMessages.VALIDATION_ERROR_REQUIRED_ITEM }),
     }),
     {},
   );

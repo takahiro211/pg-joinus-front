@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Typography from '../components/Typography';
+import { Labels } from '../../../utils/Consts';
 
 function ProductSmokingHero() {
   return (
@@ -20,11 +21,11 @@ function ProductSmokingHero() {
         }}
       >
         <Typography variant="h4" component="span">
-          よくあるご質問・お問い合わせ
+          {Labels.FAQ_CONTACT}
         </Typography>
       </Button>
       <Typography variant="subtitle1" sx={{ my: 3 }}>
-        お困りの際はこちらをご確認ください。
+        {Labels.FAQ_CONTACT_DESCRIPTION}
       </Typography>
       <Box
         component="img"

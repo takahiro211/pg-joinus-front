@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Typography from '../components/Typography';
+import { ProductIntro } from '../../../utils/Consts';
 
 const item: SxProps<Theme> = {
   display: 'flex',
@@ -36,15 +37,10 @@ function ProductValues() {
                 sx={{ height: 55 }}
               />
               <Typography variant="h6" sx={{ my: 5 }}>
-                無料でOSSへ参加
+                {ProductIntro.LEFT}
               </Typography>
               <Typography variant="h5">
-                {
-                  'OSS中心であるため使用料は完全無料。'
-                }
-                {
-                  '実践レベルのソースに触れる機会を得られます'
-                }
+                {ProductIntro.LEFT_DESCRIPTION}
               </Typography>
             </Box>
           </Grid>
@@ -57,13 +53,10 @@ function ProductValues() {
                 sx={{ height: 55 }}
               />
               <Typography variant="h6" sx={{ my: 5 }}>
-                リスキリング支援
+                {ProductIntro.CENTER}
               </Typography>
               <Typography variant="h5">
-                {
-                  '未経験言語にチャレンジしたい方、あるいはプログラミング経験が浅い方でも'
-                }
-                {'参画可能なプロジェクトを見つけられます。'}
+                {ProductIntro.CENTER_DESCRIPTION}
               </Typography>
             </Box>
           </Grid>
@@ -76,11 +69,10 @@ function ProductValues() {
                 sx={{ height: 55 }}
               />
               <Typography variant="h6" sx={{ my: 5 }}>
-                プログラマーの募集
+                {ProductIntro.RIGHT}
               </Typography>
               <Typography variant="h5">
-                {'自身のGitHubリポジトリを掲載可能。'}
-                {'学ぶ意欲の高いプログラマーからの参画が期待できます。'}
+                {ProductIntro.RIGHT_DESCRIPTION}
               </Typography>
             </Box>
           </Grid>

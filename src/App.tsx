@@ -1,5 +1,4 @@
 import './App.css';
-import React from "react";
 import Home from './pages/Home';
 import { AnimatePresence } from "framer-motion";
 import AppFooter from './pages/modules/views/AppFooter';

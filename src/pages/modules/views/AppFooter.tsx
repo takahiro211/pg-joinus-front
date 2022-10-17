@@ -5,13 +5,14 @@ import Container from '@mui/material/Container';
 import Typography from '../components/Typography';
 import TextField from '../components/TextField';
 import { Link } from 'react-router-dom';
+import { AppStrings, Labels } from '../../../utils/Consts';
 
 function Copyright() {
   return (
     <React.Fragment>
       {'© '}
       <Link color="inherit" to="/">
-        PGJoinUs
+        {AppStrings.APP_NAME}
       </Link>{' '}
       {new Date().getFullYear()}
     </React.Fragment>
@@ -59,13 +60,13 @@ export default function AppFooter() {
               sx={{ height: 120 }}
             >
               <Grid item sx={{ display: 'flex' }}>
-                <Box component="a" href="https://mui.com/" sx={iconStyle}>
+                <Box component="a" href="https://ytmemo.com/" sx={iconStyle} target="_blank">
                   <img
                     src="/img/appFooterFacebook.png"
                     alt="Facebook"
                   />
                 </Box>
-                <Box component="a" href="https://twitter.com/MUI_hq" sx={iconStyle}>
+                <Box component="a" href="https://twitter.com/h211yt" sx={iconStyle} target="_blank">
                   <img
                     src="/img/appFooterTwitter.png"
                     alt="Twitter"
@@ -79,20 +80,20 @@ export default function AppFooter() {
           </Grid>
           <Grid item xs={6} sm={4} md={2}>
             <Typography variant="h6" marked="left" gutterBottom>
-              Legal
+              {Labels.ABOUT}
             </Typography>
             <Box component="ul" sx={{ m: 0, listStyle: 'none', p: 0 }}>
               <Box component="li" sx={{ py: 0.5 }}>
-                <Link to="/terms/">Terms</Link>
+                <Link to="/terms/">{Labels.TERMS}</Link>
               </Box>
               <Box component="li" sx={{ py: 0.5 }}>
-                <Link to="/privacy/">Privacy</Link>
+                <Link to="/privacy/">{Labels.PRIVACY}</Link>
               </Box>
             </Box>
           </Grid>
           <Grid item xs={6} sm={8} md={4}>
             <Typography variant="h6" marked="left" gutterBottom>
-              テーマを切り替える
+              {Labels.CHANGE_THEME}
             </Typography>
             <TextField
               select
@@ -113,22 +114,22 @@ export default function AppFooter() {
           <Grid item>
             <Typography variant="caption">
               {'Icons made by '}
-              <Link to="https://www.freepik.com" rel="sponsored" title="Freepik">
+              <a href="https://www.freepik.com" rel="sponsored" title="Freepik" target="_blank">
                 Freepik
-              </Link>
+              </a>
               {' from '}
-              <Link to="https://www.flaticon.com" rel="sponsored" title="Flaticon">
+              <a href="https://www.flaticon.com" rel="sponsored" title="Flaticon" target="_blank">
                 www.flaticon.com
-              </Link>
+              </a>
               {' is licensed by '}
-              <Link
-                to="https://creativecommons.org/licenses/by/3.0/"
+              <a
+                href="https://creativecommons.org/licenses/by/3.0/"
                 title="Creative Commons BY 3.0"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 CC 3.0 BY
-              </Link>
+              </a>
             </Typography>
           </Grid>
         </Grid>
