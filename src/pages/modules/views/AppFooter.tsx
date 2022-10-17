@@ -114,11 +114,11 @@ export default function AppFooter() {
           <Grid item>
             <Typography variant="caption">
               {'Icons made by '}
-              <a href="https://www.freepik.com" rel="sponsored" title="Freepik" target="_blank">
+              <a href="https://www.freepik.com" rel="noreferrer" title="Freepik" target="_blank">
                 Freepik
               </a>
               {' from '}
-              <a href="https://www.flaticon.com" rel="sponsored" title="Flaticon" target="_blank">
+              <a href="https://www.flaticon.com" rel="noreferrer" title="Flaticon" target="_blank">
                 www.flaticon.com
               </a>
               {' is licensed by '}

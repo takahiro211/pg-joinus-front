@@ -105,17 +105,18 @@ function ProductHowItWorks() {
             </Grid>
           </Grid>
         </div>
-        <Link to="sign-up"
-          style={hideUnderline}>
-          <Button
-            color="secondary"
-            size="large"
-            variant="contained"
-            sx={{ mt: 8 }}
-          >
-            {FlowOfJoin.FIND_PROJECT}
-          </Button>
-        </Link>
+        <Box sx={{ mt: 8 }}>
+          <Link to="sign-up"
+            style={hideUnderline}>
+            <Button
+              color="secondary"
+              size="large"
+              variant="contained"
+            >
+              {FlowOfJoin.FIND_PROJECT}
+            </Button>
+          </Link>
+        </Box>
       </Container>
     </Box>
   );
