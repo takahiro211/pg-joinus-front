@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import { Field, Form, FormSpy } from 'react-final-form';
 import Typography from './modules/components/Typography';
 import AppForm from './modules/views/AppForm';
@@ -39,7 +39,7 @@ function SignUp() {
             新規会員登録
           </Typography>
           <Typography variant="body2" align="center">
-            <Link href="/sign-in/" underline="always">
+            <Link to="/sign-in/">
               既にアカウントをお持ちの方はこちら
             </Link>
           </Typography>

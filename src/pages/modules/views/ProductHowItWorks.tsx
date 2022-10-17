@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
+import { Link } from 'react-router-dom';
 
 const item: SxProps<Theme> = {
   display: 'flex',
@@ -103,16 +104,16 @@ function ProductHowItWorks() {
             </Grid>
           </Grid>
         </div>
-        <Button
-          color="secondary"
-          size="large"
-          variant="contained"
-          component="a"
-          href="/sign-up/"
-          sx={{ mt: 8 }}
-        >
-          プロジェクトを探す
-        </Button>
+        <Link to="sign-up">
+          <Button
+            color="secondary"
+            size="large"
+            variant="contained"
+            sx={{ mt: 8 }}
+          >
+            プロジェクトを探す
+          </Button>
+        </Link>
       </Container>
     </Box>
   );

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Field, Form, FormSpy } from 'react-final-form';
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import Typography from './modules/components/Typography';
 import AppForm from './modules/views/AppForm';
 import { email, required } from './modules/form/validation';
@@ -40,9 +40,7 @@ function SignIn() {
           <Typography variant="body2" align="center">
             {''}
             <Link
-              href="/sign-up/"
-              align="center"
-              underline="always"
+              to="/sign-up/"
             >
               会員登録がお済みでない方はこちら
             </Link>
@@ -101,7 +99,7 @@ function SignIn() {
           )}
         </Form>
         <Typography align="center">
-          <Link underline="always" href="/forgot-password/">
+          <Link to="/forgot-password/">
             パスワードをお忘れの方
           </Link>
         </Typography>

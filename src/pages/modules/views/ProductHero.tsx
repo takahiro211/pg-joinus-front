@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
@@ -32,16 +33,19 @@ export default function ProductHero() {
       >
         スキルに応じたGitHubリポジトリをご紹介
       </Typography>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        component="a"
-        href="/sign-up/"
-        sx={{ minWidth: 200 }}
-      >
-        新規会員登録
-      </Button>
+      <Link
+        to="/sign-up/"
+        >
+        <Button
+          color="secondary"
+          variant="contained"
+          size="large"
+          component="a"
+          sx={{ minWidth: 200 }}
+        >
+          新規会員登録
+        </Button>
+      </Link>
       <Typography variant="body2" color="inherit" sx={{ mt: 2 }}>
         無料の会員登録はこちらから
       </Typography>

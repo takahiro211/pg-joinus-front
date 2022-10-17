@@ -7,12 +7,13 @@ export default function withRoot<P extends JSX.IntrinsicAttributes>(
   function WithRoot(props: P) {
     return (
       <motion.div
-              initial={{ opacity: 0, y: 0 }} // 初期状態
-              animate={{ opacity: 1, y: 0 }} // マウント時
-              exit={{ opacity: 10, y: 0 }} // アンマウント時
-              transition={{
-              duration: 0.8,
-              }}
+        key={"/"}
+        initial={{ opacity: 0, x: 0 }}
+        animate={{ opacity: 4, x: 0 }}
+        exit={{ opacity: 0, x: 0 }}
+        transition={{
+          duration: 0.2,
+        }}
       >
         <Component {...props} />
       </motion.div>

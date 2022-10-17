@@ -24,11 +24,11 @@ function App() {
         <AnimatePresence exitBeforeEnter>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
-            <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="sign-in" element={<SignIn />} />
+            <Route path="sign-up" element={<SignUp />} />
+            <Route path="terms" element={<Terms />} />
+            <Route path="privacy" element={<Privacy />} />
+            <Route path="forgot-password" element={<ForgotPassword />} />
           </Routes>
         </AnimatePresence>
         <AppFooter />

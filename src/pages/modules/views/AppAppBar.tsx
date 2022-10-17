@@ -1,14 +1,14 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import AppBar from '../components/AppBar';
 import Toolbar from '../components/Toolbar';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Container } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-const rightLink = {
-  fontSize: 16,
-  color: 'common.white',
+const appBarLinkText = {
+  textDecoration: "none",
+  fontSize: 24,
+  color: 'inherit',
   ml: 3,
 };
 
@@ -19,25 +19,26 @@ function AppAppBar() {
         <Container maxWidth="xl">
           <Toolbar sx={{ justifyContent: 'space-between' }}>
             <Box sx={{ flex: 1 }} />
-            <Link
-              variant="h6"
-              underline="none"
-              color="inherit"
-              href="/"
-              sx={{ fontSize: 24 }}
-            >
-              {'PGJoinUs'}
-            </Link>
-            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+            <h6>
               <Link
                 color="inherit"
-                variant="h6"
-                underline="none"
-                href="/sign-in/"
-                sx={rightLink}
+                to="/"
+                style={appBarLinkText}
               >
-                <MenuIcon />
+                {'PGJoinUs'}
               </Link>
+            </h6>
+            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+              <h6>
+                <Link
+                  color="inherit"
+                  to="sign-in"
+                  style={appBarLinkText}
+                >
+                  <MenuIcon />
+                </Link>
+                
+              </h6>
             </Box>
           </Toolbar>
         </Container>
