@@ -1,5 +1,6 @@
 import * as React from "react";
 import { motion } from "framer-motion";
+import { ScrollToTop } from "./utils/Util";
 
 export default function withRoot<P extends JSX.IntrinsicAttributes>(
   Component: React.ComponentType<P>
@@ -14,6 +15,7 @@ export default function withRoot<P extends JSX.IntrinsicAttributes>(
           duration: 0.3,
         }}
       >
+        <ScrollToTop />
         <Component {...props} />
       </motion.div>
     );
