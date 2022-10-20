@@ -8,10 +8,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import { appBarMenuBtn } from '../../../utils/Styles';
+import { Labels } from '../../../utils/Consts';
+import { GetIcons } from '../../../utils/Util';
+import { Login } from '@mui/icons-material';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
@@ -39,17 +43,18 @@ export default function DrawerMenu() {
 
   const list = (anchor: Anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{ width: 250 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {[Labels.SIGN_IN, Labels.SIGN_UP].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {(text === Labels.SIGN_IN) && <Login />}
+                {(text === Labels.SIGN_UP) && <PersonAddIcon />}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -58,11 +63,12 @@ export default function DrawerMenu() {
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        {[Labels.CLOSE_MENU].map((text) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton 
+            onClick={toggleDrawer(anchor, false)}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <CloseIcon />
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -79,7 +85,7 @@ export default function DrawerMenu() {
           <Button
           onClick={toggleDrawer(anchor, true)}
           style={appBarMenuBtn}
-        >
+          >
             <MenuIcon />
           </Button>
           <Drawer
