@@ -1,23 +1,22 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
-import { appBarMenuBtn, menuItemLink } from '../../../utils/Styles';
-import { Labels } from '../../../utils/Consts';
-import { Login } from '@mui/icons-material';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import { Link } from 'react-router-dom';
-import { Typography } from '@mui/material';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import { appBarMenuBtn, menuItemLink } from "../../../utils/Styles";
+import { Labels } from "../../../utils/Consts";
+import { Login } from "@mui/icons-material";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import { Link } from "react-router-dom";
 
-type Anchor = 'top' | 'left' | 'bottom' | 'right';
+type Anchor = "top" | "left" | "bottom" | "right";
 
 export default function DrawerMenu() {
   const [state, setState] = React.useState({
@@ -31,9 +30,9 @@ export default function DrawerMenu() {
     (anchor: Anchor, open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
-        event.type === 'keydown' &&
-        ((event as React.KeyboardEvent).key === 'Tab' ||
-          (event as React.KeyboardEvent).key === 'Shift')
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
       ) {
         return;
       }
@@ -43,45 +42,40 @@ export default function DrawerMenu() {
 
   const getListItem = (item: string) => (
     <Box>
-        {(item === Labels.SIGN_IN) && 
-            <Link to="sign-in" 
-                style={menuItemLink}
-            >
-                <ListItem key={item} disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <Login />
-                        </ListItemIcon>
-                        <ListItemText primary={item} />
-                    </ListItemButton>
-                </ListItem>
-            </Link>
-        }
-        {(item === Labels.SIGN_UP) && 
-            <Link to="sign-up"
-                style={menuItemLink}
-            >
-                <ListItem key={item} disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <PersonAddIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={item} />
-                    </ListItemButton>
-                </ListItem>
-            </Link>
-        }
-        {(item === Labels.CLOSE_MENU) &&
-            <ListItem key={item} disablePadding>
-            <ListItemButton 
-            onClick={toggleDrawer('right', false)}>
-                <ListItemIcon>
-                <CloseIcon />
-                </ListItemIcon>
-                <ListItemText primary={item} />
+      {item === Labels.SIGN_IN && (
+        <Link to="sign-in" style={menuItemLink}>
+          <ListItem key={item} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <Login />
+              </ListItemIcon>
+              <ListItemText primary={item} />
             </ListItemButton>
-            </ListItem>
-        }
+          </ListItem>
+        </Link>
+      )}
+      {item === Labels.SIGN_UP && (
+        <Link to="sign-up" style={menuItemLink}>
+          <ListItem key={item} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <PersonAddIcon />
+              </ListItemIcon>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+      )}
+      {item === Labels.CLOSE_MENU && (
+        <ListItem key={item} disablePadding>
+          <ListItemButton onClick={toggleDrawer("right", false)}>
+            <ListItemIcon>
+              <CloseIcon />
+            </ListItemIcon>
+            <ListItemText primary={item} />
+          </ListItemButton>
+        </ListItem>
+      )}
     </Box>
   );
 
@@ -93,27 +87,18 @@ export default function DrawerMenu() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {[Labels.SIGN_IN, Labels.SIGN_UP].map((text) => (
-            getListItem(text)
-        ))}
+        {[Labels.SIGN_IN, Labels.SIGN_UP].map((text) => getListItem(text))}
       </List>
       <Divider />
-      <List>
-        {[Labels.CLOSE_MENU].map((text) => (
-            getListItem(text)
-        ))}
-      </List>
+      <List>{[Labels.CLOSE_MENU].map((text) => getListItem(text))}</List>
     </Box>
   );
 
   return (
     <div>
-      {(['right'] as const).map((anchor) => (
+      {(["right"] as const).map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button
-          onClick={toggleDrawer(anchor, true)}
-          style={appBarMenuBtn}
-          >
+          <Button onClick={toggleDrawer(anchor, true)} style={appBarMenuBtn}>
             <MenuIcon />
           </Button>
           <Drawer
