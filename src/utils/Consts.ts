@@ -25,6 +25,7 @@ export const Labels = {
   PRIVACY: "プライバシー",
   ABOUT: "サイトについて",
   CHANGE_THEME: "テーマを切り替える",
+  CLOSE_MENU: "メニューを閉じる",
 
 };
 
