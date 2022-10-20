@@ -13,7 +13,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { appBarMenuBtn } from '../../../utils/Styles';
 import { Labels } from '../../../utils/Consts';
-import { GetIcons } from '../../../utils/Util';
 import { Login } from '@mui/icons-material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
