@@ -1,39 +1,51 @@
 import Box from '@mui/material/Box';
 import AppBar from '../components/AppBar';
 import Toolbar from '../components/Toolbar';
-import MenuIcon from '@mui/icons-material/Menu';
-import { Container } from '@mui/material';
+import { Container, Hidden } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { AppStrings } from '../../../utils/Consts';
-import { appBarLinkText } from '../../../utils/Styles';
+import { AppStrings, Labels } from '../../../utils/Consts';
+import { appBarLinkSignIn, appBarLinkSignUp, appBarTitle } from '../../../utils/Styles';
+import DrawerMenu from '../components/DrawerMenu';
 
 function AppAppBar() {
   return (
     <div>
       <AppBar position="fixed">
-        <Container maxWidth="xl">
+        <Container maxWidth="lg">
           <Toolbar sx={{ justifyContent: 'space-between' }}>
             <Box sx={{ flex: 1 }} />
-            <h6>
+            <h1>
               <Link
                 color="inherit"
                 to="/"
-                style={appBarLinkText}
+                style={appBarTitle}
               >
                 {AppStrings.APP_NAME}
               </Link>
-            </h6>
-            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-              <h6>
+            </h1>
+            <Box
+              sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}
+            >
+              <Hidden mdUp>
+                <DrawerMenu />
+              </Hidden>
+              <Hidden mdDown>
                 <Link
                   color="inherit"
-                  to="sign-in"
-                  style={appBarLinkText}
+                  to="/sign-in"
+                  style={appBarLinkSignIn}
                 >
-                  <MenuIcon />
+                  {Labels.SIGN_IN}
                 </Link>
-                
-              </h6>
+                <Link
+                  color="inherit"
+                  to="sign-up"
+                  style={appBarLinkSignUp}
+                >
+                  {Labels.SIGN_UP}
+                </Link>
+              </Hidden>
+
             </Box>
           </Toolbar>
         </Container>
