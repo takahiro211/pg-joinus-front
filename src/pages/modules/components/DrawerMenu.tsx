@@ -8,13 +8,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { appBarMenuBtn } from '../../../utils/Styles';
+import { appBarMenuBtn, menuItemLink } from '../../../utils/Styles';
 import { Labels } from '../../../utils/Consts';
 import { Login } from '@mui/icons-material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import { Link } from 'react-router-dom';
+import { Typography } from '@mui/material';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
@@ -40,6 +41,50 @@ export default function DrawerMenu() {
       setState({ ...state, [anchor]: open });
     };
 
+  const getListItem = (item: string) => (
+    <Box>
+        {(item === Labels.SIGN_IN) && 
+            <Link to="sign-in" 
+                style={menuItemLink}
+            >
+                <ListItem key={item} disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <Login />
+                        </ListItemIcon>
+                        <ListItemText primary={item} />
+                    </ListItemButton>
+                </ListItem>
+            </Link>
+        }
+        {(item === Labels.SIGN_UP) && 
+            <Link to="sign-up"
+                style={menuItemLink}
+            >
+                <ListItem key={item} disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <PersonAddIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={item} />
+                    </ListItemButton>
+                </ListItem>
+            </Link>
+        }
+        {(item === Labels.CLOSE_MENU) &&
+            <ListItem key={item} disablePadding>
+            <ListItemButton 
+            onClick={toggleDrawer('right', false)}>
+                <ListItemIcon>
+                <CloseIcon />
+                </ListItemIcon>
+                <ListItemText primary={item} />
+            </ListItemButton>
+            </ListItem>
+        }
+    </Box>
+  );
+
   const list = (anchor: Anchor) => (
     <Box
       sx={{ width: 250 }}
@@ -49,29 +94,13 @@ export default function DrawerMenu() {
     >
       <List>
         {[Labels.SIGN_IN, Labels.SIGN_UP].map((text) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {(text === Labels.SIGN_IN) && <Login />}
-                {(text === Labels.SIGN_UP) && <PersonAddIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+            getListItem(text)
         ))}
       </List>
       <Divider />
       <List>
         {[Labels.CLOSE_MENU].map((text) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton 
-            onClick={toggleDrawer(anchor, false)}>
-              <ListItemIcon>
-                <CloseIcon />
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+            getListItem(text)
         ))}
       </List>
     </Box>

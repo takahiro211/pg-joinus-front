@@ -28,6 +28,12 @@ export const appBarLinkSignUp = {
   marginLeft: 16,
 };
 
+export const menuItemLink = {
+  textDecoration: "none",
+  fontSize: 16,
+  color: 'inherit',
+};
+
 export const hideUnderline = {
   textDecoration: "none",
 };
