@@ -1,20 +1,20 @@
-import * as React from 'react';
-import { Field, Form, FormSpy } from 'react-final-form';
-import Box from '@mui/material/Box';
-import Typography from './modules/components/Typography';
-import AppForm from './modules/views/AppForm';
-import { email, required } from './modules/form/validation';
-import RFTextField from './modules/form/RFTextField';
-import FormButton from './modules/form/FormButton';
-import FormFeedback from './modules/form/FormFeedback';
-import withRoot from '../withRoot';
-import { FormItems, Labels } from '../utils/Consts';
+import * as React from "react";
+import { Field, Form, FormSpy } from "react-final-form";
+import Box from "@mui/material/Box";
+import Typography from "./modules/components/Typography";
+import AppForm from "./modules/views/AppForm";
+import { email, required } from "./modules/form/validation";
+import RFTextField from "./modules/form/RFTextField";
+import FormButton from "./modules/form/FormButton";
+import FormFeedback from "./modules/form/FormFeedback";
+import withRoot from "../withRoot";
+import { FormItems, Labels } from "../utils/Consts";
 
 function ForgotPassword() {
   const [sent, setSent] = React.useState(false);
 
   const validate = (values: { [index: string]: string }) => {
-    const errors = required(['email'], values);
+    const errors = required(["email"], values);
 
     if (!errors.email) {
       const emailError = email(values.email);
@@ -35,10 +35,10 @@ function ForgotPassword() {
       <AppForm>
         <React.Fragment>
           <Typography variant="h3" gutterBottom marked="center" align="center">
-              {Labels.FORGOT_PASSWORD}
+            {Labels.FORGOT_PASSWORD}
           </Typography>
           <Typography variant="body2" align="center">
-              {Labels.FORGOT_PASSWORD_DESCRIPTION}
+            {Labels.FORGOT_PASSWORD_DESCRIPTION}
           </Typography>
         </React.Fragment>
         <Form
@@ -47,7 +47,12 @@ function ForgotPassword() {
           validate={validate}
         >
           {({ handleSubmit: handleSubmit2, submitting }) => (
-            <Box component="form" onSubmit={handleSubmit2} noValidate sx={{ mt: 6 }}>
+            <Box
+              component="form"
+              onSubmit={handleSubmit2}
+              noValidate
+              sx={{ mt: 6 }}
+            >
               <Field
                 autoComplete="email"
                 component={RFTextField}

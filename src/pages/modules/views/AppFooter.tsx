@@ -1,19 +1,19 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import Typography from '../components/Typography';
-import TextField from '../components/TextField';
-import { Link } from 'react-router-dom';
-import { AppStrings, Labels } from '../../../utils/Consts';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import Typography from "../components/Typography";
+import TextField from "../components/TextField";
+import { Link } from "react-router-dom";
+import { AppStrings, Labels } from "../../../utils/Consts";
 
 function Copyright() {
   return (
     <React.Fragment>
-      {'© '}
+      {"© "}
       <Link color="inherit" to="/">
         {AppStrings.APP_NAME}
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
     </React.Fragment>
   );
@@ -22,24 +22,24 @@ function Copyright() {
 const iconStyle = {
   width: 48,
   height: 48,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: 'warning.main',
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "warning.main",
   mr: 1,
-  '&:hover': {
-    bgcolor: 'warning.dark',
+  "&:hover": {
+    bgcolor: "warning.dark",
   },
 };
 
 const LANGUAGES = [
   {
-    code: 'light',
-    name: 'ライト',
+    code: "light",
+    name: "ライト",
   },
   {
-    code: 'night',
-    name: 'ナイト',
+    code: "night",
+    name: "ナイト",
   },
 ];
 
@@ -47,9 +47,9 @@ export default function AppFooter() {
   return (
     <Typography
       component="footer"
-      sx={{ display: 'flex', bgcolor: 'secondary.light' }}
+      sx={{ display: "flex", bgcolor: "secondary.light" }}
     >
-      <Container sx={{ my: 8, display: 'flex' }}>
+      <Container sx={{ my: 8, display: "flex" }}>
         <Grid container spacing={5}>
           <Grid item xs={6} sm={4} md={3}>
             <Grid
@@ -59,18 +59,22 @@ export default function AppFooter() {
               spacing={2}
               sx={{ height: 120 }}
             >
-              <Grid item sx={{ display: 'flex' }}>
-                <Box component="a" href="https://ytmemo.com/" sx={iconStyle} target="_blank">
-                  <img
-                    src="/img/appFooterFacebook.png"
-                    alt="Facebook"
-                  />
+              <Grid item sx={{ display: "flex" }}>
+                <Box
+                  component="a"
+                  href="https://ytmemo.com/"
+                  sx={iconStyle}
+                  target="_blank"
+                >
+                  <img src="/img/appFooterFacebook.png" alt="Facebook" />
                 </Box>
-                <Box component="a" href="https://twitter.com/h211yt" sx={iconStyle} target="_blank">
-                  <img
-                    src="/img/appFooterTwitter.png"
-                    alt="Twitter"
-                  />
+                <Box
+                  component="a"
+                  href="https://twitter.com/h211yt"
+                  sx={iconStyle}
+                  target="_blank"
+                >
+                  <img src="/img/appFooterTwitter.png" alt="Twitter" />
                 </Box>
               </Grid>
               <Grid item>
@@ -82,7 +86,7 @@ export default function AppFooter() {
             <Typography variant="h6" marked="left" gutterBottom>
               {Labels.ABOUT}
             </Typography>
-            <Box component="ul" sx={{ m: 0, listStyle: 'none', p: 0 }}>
+            <Box component="ul" sx={{ m: 0, listStyle: "none", p: 0 }}>
               <Box component="li" sx={{ py: 0.5 }}>
                 <Link to="/terms/">{Labels.TERMS}</Link>
               </Box>
@@ -113,15 +117,25 @@ export default function AppFooter() {
           </Grid>
           <Grid item>
             <Typography variant="caption">
-              {'Icons made by '}
-              <a href="https://www.freepik.com" rel="noopener" title="Freepik" target="_blank">
+              {"Icons made by "}
+              <a
+                href="https://www.freepik.com"
+                rel="noreferrer"
+                title="Freepik"
+                target="_blank"
+              >
                 Freepik
               </a>
-              {' from '}
-              <a href="https://www.flaticon.com" rel="noopener" title="Flaticon" target="_blank">
+              {" from "}
+              <a
+                href="https://www.flaticon.com"
+                rel="noreferrer"
+                title="Flaticon"
+                target="_blank"
+              >
                 www.flaticon.com
               </a>
-              {' is licensed by '}
+              {" is licensed by "}
               <a
                 href="https://creativecommons.org/licenses/by/3.0/"
                 title="Creative Commons BY 3.0"

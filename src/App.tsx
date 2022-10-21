@@ -12,6 +12,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import theme from './theme';
 import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
+import MyPage from './pages/MyPage';
 
 function App() {
   const location = useLocation();
@@ -28,6 +29,7 @@ function App() {
             <Route path="terms" element={<Terms />} />
             <Route path="privacy" element={<Privacy />} />
             <Route path="forgot-password" element={<ForgotPassword />} />
+            <Route path="mypage" element={<MyPage />} />
           </Routes>
         </AnimatePresence>
         <AppFooter />

@@ -1,12 +1,12 @@
-import * as React from 'react';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import Markdown from './modules/components/Markdown';
-import Typography from './modules/components/Typography';
-import withRoot from '../withRoot';
+import * as React from "react";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import Markdown from "./modules/components/Markdown";
+import Typography from "./modules/components/Typography";
+import withRoot from "../withRoot";
 
 function Privacy() {
-  const privacy = 'privacy'
+  const privacy = "privacy";
   return (
     <React.Fragment>
       <Container>

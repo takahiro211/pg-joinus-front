@@ -16,7 +16,8 @@ export const Labels = {
   FORGOT_PASSWORD_USER: "パスワードをお忘れの方",
   SIGN_IN: "ログイン",
   FORGOT_PASSWORD: "パスワードリセット",
-  FORGOT_PASSWORD_DESCRIPTION: "メールアドレスを入力してください。お送りするリンクよりパスワードリセットを実施してください。",
+  FORGOT_PASSWORD_DESCRIPTION:
+    "メールアドレスを入力してください。お送りするリンクよりパスワードリセットを実施してください。",
   PROGRESS_SIGNIN: "ログイン処理中…",
   PROGRESS_SIGNUP: "登録処理中…",
   SEND: "送信する",
@@ -26,26 +27,30 @@ export const Labels = {
   ABOUT: "サイトについて",
   CHANGE_THEME: "テーマを切り替える",
   CLOSE_MENU: "メニューを閉じる",
-
 };
 
 export const ProductIntro = {
   LEFT: "無料でOSSへ参加",
-  LEFT_DESCRIPTION: "OSS中心であるため使用料は完全無料。実践レベルのソースに触れる機会を得られます",
+  LEFT_DESCRIPTION:
+    "OSS中心であるため使用料は完全無料。実践レベルのソースに触れる機会を得られます",
   CENTER: "リスキリング支援",
-  CENTER_DESCRIPTION: "未経験言語にチャレンジしたい方、あるいはプログラミング経験が浅い方でも参画可能なプロジェクトを見つけられます。",
+  CENTER_DESCRIPTION:
+    "未経験言語にチャレンジしたい方、あるいはプログラミング経験が浅い方でも参画可能なプロジェクトを見つけられます。",
   RIGHT: "プログラマーの募集",
-  RIGHT_DESCRIPTION: "自身のGitHubリポジトリを掲載可能。学ぶ意欲の高いプログラマーからの参画が期待できます。"
+  RIGHT_DESCRIPTION:
+    "自身のGitHubリポジトリを掲載可能。学ぶ意欲の高いプログラマーからの参画が期待できます。",
 };
 
 export const FlowOfJoin = {
   LEFT: "1.",
   LEFT_DESCRIPTION: "一覧または検索から興味のあるリポジトリを探します。",
   CENTER: "2.",
-  CENTER_DESCRIPTION: "ソースをクローンし開発作業完了後、プルリクエストを作成します。",
+  CENTER_DESCRIPTION:
+    "ソースをクローンし開発作業完了後、プルリクエストを作成します。",
   RIGHT: "3.",
-  RIGHT_DESCRIPTION: "プルリクエストが受け入れられ作業内容が無事マージされれば完了です。再びPGJoinUsで新しいプロジェクトを探しましょう。",
-  FIND_PROJECT: "プロジェクトを探す"
+  RIGHT_DESCRIPTION:
+    "プルリクエストが受け入れられ作業内容が無事マージされれば完了です。再びPGJoinUsで新しいプロジェクトを探しましょう。",
+  FIND_PROJECT: "プロジェクトを探す",
 };
 
 export const FormItems = {

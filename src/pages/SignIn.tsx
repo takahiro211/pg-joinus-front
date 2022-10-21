@@ -1,21 +1,25 @@
-import * as React from 'react';
-import { Field, Form, FormSpy } from 'react-final-form';
-import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom';
-import Typography from './modules/components/Typography';
-import AppForm from './modules/views/AppForm';
-import { email, required } from './modules/form/validation';
-import RFTextField from './modules/form/RFTextField';
-import FormButton from './modules/form/FormButton';
-import FormFeedback from './modules/form/FormFeedback';
-import withRoot from '../withRoot';
-import { FormItems, Labels } from '../utils/Consts';
+import * as React from "react";
+import { Field, Form, FormSpy } from "react-final-form";
+import Box from "@mui/material/Box";
+import { Link, useNavigate } from "react-router-dom";
+import Typography from "./modules/components/Typography";
+import AppForm from "./modules/views/AppForm";
+import { email, required } from "./modules/form/validation";
+import RFTextField from "./modules/form/RFTextField";
+import FormButton from "./modules/form/FormButton";
+import FormFeedback from "./modules/form/FormFeedback";
+import withRoot from "../withRoot";
+import { FormItems, Labels } from "../utils/Consts";
+import { RepositoryFactory } from "../api/RepositoryFactory";
+import { Alert, Collapse, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 function SignIn() {
   const [sent, setSent] = React.useState(false);
+  const [toastOpen, setOpen] = React.useState(false);
 
   const validate = (values: { [index: string]: string }) => {
-    const errors = required(['email', 'password'], values);
+    const errors = required(["email", "password"], values);
 
     if (!errors.email) {
       const emailError = email(values.email);
@@ -27,8 +31,24 @@ function SignIn() {
     return errors;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (values: { "": string }) => {
     setSent(true);
+    const value = Object.entries(values).map((x) => x);
+    userResponse(value[0][1], value[1][1]);
+  };
+
+  // API
+  const userRepository = RepositoryFactory.get("login");
+  const navigate = useNavigate();
+  const userResponse = async (email: string, password: string) => {
+    try {
+      const loginResponse = await userRepository.login(email, password);
+      console.log("login", loginResponse.status);
+      navigate("/mypage");
+    } catch (e) {
+      setOpen(true);
+      setSent(false);
+    }
   };
 
   return (
@@ -39,12 +59,8 @@ function SignIn() {
             {Labels.SIGN_IN}
           </Typography>
           <Typography variant="body2" align="center">
-            {''}
-            <Link
-              to="/sign-up/"
-            >
-              {Labels.NOT_REGISTERED}
-            </Link>
+            {""}
+            <Link to="/sign-up/">{Labels.NOT_REGISTERED}</Link>
           </Typography>
         </React.Fragment>
         <Form
@@ -53,7 +69,34 @@ function SignIn() {
           validate={validate}
         >
           {({ handleSubmit: handleSubmit2, submitting }) => (
-            <Box component="form" onSubmit={handleSubmit2} noValidate sx={{ mt: 6 }}>
+            <Box
+              component="form"
+              onSubmit={handleSubmit2}
+              noValidate
+              sx={{ mt: 6 }}
+            >
+              <Collapse in={toastOpen}>
+                <Alert
+                  severity="error"
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        setOpen(false);
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                  sx={{ mb: 2 }}
+                >
+                  <strong>ログインできません</strong>
+                  <br />
+                  メールアドレスかパスワードに誤りがあります。
+                </Alert>
+              </Collapse>
               <Field
                 autoComplete="email"
                 component={RFTextField}
@@ -99,9 +142,7 @@ function SignIn() {
           )}
         </Form>
         <Typography align="center">
-          <Link to="/forgot-password/">
-              {Labels.FORGOT_PASSWORD_USER}
-          </Link>
+          <Link to="/forgot-password/">{Labels.FORGOT_PASSWORD_USER}</Link>
         </Typography>
       </AppForm>
     </React.Fragment>

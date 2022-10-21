@@ -1,26 +1,25 @@
-import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { Labels } from '../../../utils/Consts';
-import { hideUnderline } from '../../../utils/Styles';
-import Button from '../components/Button';
-import Typography from '../components/Typography';
-import ProductHeroLayout from './ProductHeroLayout';
+import * as React from "react";
+import { Link } from "react-router-dom";
+import { Labels } from "../../../utils/Consts";
+import { hideUnderline } from "../../../utils/Styles";
+import Button from "../components/Button";
+import Typography from "../components/Typography";
+import ProductHeroLayout from "./ProductHeroLayout";
 
-const backgroundImage =
-  'https://source.unsplash.com/dWYU3i-mqEo';
+const backgroundImage = "https://source.unsplash.com/dWYU3i-mqEo";
 
 export default function ProductHero() {
   return (
     <ProductHeroLayout
       sxBackground={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundColor: '#7fc7d9', // Average color of the background image.
-        backgroundPosition: 'center',
+        backgroundColor: "#7fc7d9", // Average color of the background image.
+        backgroundPosition: "center",
       }}
     >
       {/* Increase the network loading priority of the background image. */}
       <img
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
         src={backgroundImage}
         alt={Labels.CATCH}
       />
@@ -35,10 +34,7 @@ export default function ProductHero() {
       >
         {Labels.SUBJECT}
       </Typography>
-      <Link
-        to="/sign-up/"
-        style={hideUnderline}
-        >
+      <Link to="/sign-up/" style={hideUnderline}>
         <Button
           color="secondary"
           variant="contained"
