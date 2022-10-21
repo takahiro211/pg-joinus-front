@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Field, Form, FormSpy } from "react-final-form";
 import Box from "@mui/material/Box";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Typography from "./modules/components/Typography";
 import AppForm from "./modules/views/AppForm";
 import { email, required } from "./modules/form/validation";
@@ -10,9 +10,13 @@ import FormButton from "./modules/form/FormButton";
 import FormFeedback from "./modules/form/FormFeedback";
 import withRoot from "../withRoot";
 import { FormItems, Labels } from "../utils/Consts";
+import { RepositoryFactory } from "../api/RepositoryFactory";
+import { Alert, Collapse, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 function SignIn() {
   const [sent, setSent] = React.useState(false);
+  const [toastOpen, setOpen] = React.useState(false);
 
   const validate = (values: { [index: string]: string }) => {
     const errors = required(["email", "password"], values);
@@ -27,8 +31,24 @@ function SignIn() {
     return errors;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (values: { "": string }) => {
     setSent(true);
+    const value = Object.entries(values).map((x) => x);
+    userResponse(value[0][1], value[1][1]);
+  };
+
+  // API
+  const userRepository = RepositoryFactory.get("login");
+  const navigate = useNavigate();
+  const userResponse = async (email: string, password: string) => {
+    try {
+      const loginResponse = await userRepository.login(email, password);
+      console.log("login", loginResponse.status);
+      navigate("/mypage");
+    } catch (e) {
+      setOpen(true);
+      setSent(false);
+    }
   };
 
   return (
@@ -55,6 +75,28 @@ function SignIn() {
               noValidate
               sx={{ mt: 6 }}
             >
+              <Collapse in={toastOpen}>
+                <Alert
+                  severity="error"
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        setOpen(false);
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                  sx={{ mb: 2 }}
+                >
+                  <strong>ログインできません</strong>
+                  <br />
+                  メールアドレスかパスワードに誤りがあります。
+                </Alert>
+              </Collapse>
               <Field
                 autoComplete="email"
                 component={RFTextField}
