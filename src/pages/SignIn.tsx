@@ -13,6 +13,7 @@ import { FormItems, Labels } from "../utils/Consts";
 import { RepositoryFactory } from "../api/RepositoryFactory";
 import { Alert, Collapse, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import AppAppBar from "./modules/views/AppAppBar";
 
 function SignIn() {
   const [sent, setSent] = React.useState(false);
@@ -44,6 +45,9 @@ function SignIn() {
     try {
       const loginResponse = await userRepository.login(email, password);
       console.log("login", loginResponse.status);
+      // ※ issue: ログイン後にAppBarの状態を変更するために
+      // 「setLoginState」をgolobalなuseStateで管理する必要がある。
+      // AppAppBar.setLoginState(true);
       navigate("/mypage");
     } catch (e) {
       setOpen(true);

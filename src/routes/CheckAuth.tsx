@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import "../App.css";
 import { Navigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import { GetAuthState } from "../utils/Util";
 
 type Props = {
   children?: React.ReactNode;
@@ -9,9 +9,8 @@ type Props = {
 
 const CheckAuth: FC<Props> = ({ children }) => {
   // ログイン状態をクッキーから取得
-  const [cookies] = useCookies(["XSRF-TOKEN"]);
-  console.log("これはリターンの直前", cookies["XSRF-TOKEN"]);
-  return cookies["XSRF-TOKEN"] ? (
+  console.log("これはリターンの直前", GetAuthState());
+  return GetAuthState() ? (
     <>{children}</>
   ) : (
     <>
