@@ -1,7 +1,12 @@
 import axios from "axios";
 
-const repository = axios.create({
+const apiRepository = axios.create({
   baseURL: "https://api.v2.ytmemo.com/api",
+  withCredentials: true,
+});
+
+const repository = axios.create({
+  baseURL: "https://api.v2.ytmemo.com",
   withCredentials: true,
 });
 
@@ -11,20 +16,20 @@ export default (resource: string) => {
       return repository.get(resource);
     },
     login(argEmail: string, argPassword: string) {
-      repository.get("sanctum/csrf-cookie");
-      return repository.post(resource, {
+      apiRepository.get("sanctum/csrf-cookie");
+      return apiRepository.post(resource, {
         email: argEmail,
         password: argPassword,
       });
     },
     show(id: number) {
-      return repository.get(`${resource}/${id}`);
+      return apiRepository.get(`${resource}/${id}`);
     },
     post(payload: any) {
-      return repository.post(resource, payload);
+      return apiRepository.post(resource, payload);
     },
     delete(id: number) {
-      return repository.delete(`${resource}/${id}`);
+      return apiRepository.delete(`${resource}/${id}`);
     },
   };
 };
