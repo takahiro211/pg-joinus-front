@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const repository = axios.create({
-  baseURL: "http://api.ytmemo.com/api",
+  baseURL: "https://api.v2.ytmemo.com/api",
   withCredentials: true,
 });
 
