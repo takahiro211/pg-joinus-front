@@ -13,10 +13,10 @@ const repository = axios.create({
 export default (resource: string) => {
   return {
     index() {
-      return repository.get(resource);
+      return apiRepository.get(resource);
     },
     login(argEmail: string, argPassword: string) {
-      apiRepository.get("sanctum/csrf-cookie");
+      repository.get("sanctum/csrf-cookie");
       return apiRepository.post(resource, {
         email: argEmail,
         password: argPassword,
