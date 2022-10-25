@@ -1,6 +1,6 @@
 import Repository from "../Repository";
 
-const resource = "auth";
+const resource = "logout";
 const repository = Repository(resource);
 
 export default repository;

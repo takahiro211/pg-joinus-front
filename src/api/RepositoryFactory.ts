@@ -1,13 +1,13 @@
 import UserRepository from "./repositories/UserRepository";
-import AuthRepository from "./repositories/AuthRepository";
 import LoginRepository from "./repositories/LoginRepository";
+import LogoutRepository from "./repositories/LogoutRepository";
 
 interface repositoryObject {
   [name: string]: any;
 }
 
 const repositories: repositoryObject = {
-  auth: AuthRepository,
+  logout: LogoutRepository,
   login: LoginRepository,
   users: UserRepository,
 };

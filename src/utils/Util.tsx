@@ -1,6 +1,11 @@
 import * as React from "react";
 import { useLocation } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
+/**
+ * スクロール位置を画面最上部に設定する
+ * @returns null
+ */
 export const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -10,3 +15,24 @@ export const ScrollToTop = () => {
 
   return null;
 };
+
+/**
+ * クッキーからログイン状態を取得
+ * @returns boolean ログイン状態
+ */
+export function GetAuthState() {
+  let ret: boolean = false;
+  try {
+    const [cookies] = useCookies(["XSRF-TOKEN"]);
+    console.log(cookies["XSRF-TOKEN"]);
+    const value = cookies["XSRF-TOKEN"];
+    if (value == "false" || value === void 0) {
+      ret = false;
+    } else {
+      ret = true;
+    }
+  } catch (e) {
+    ret = false;
+  }
+  return ret;
+}

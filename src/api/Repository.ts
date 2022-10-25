@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const repository = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "http://api.ytmemo.com/api",
+  withCredentials: true,
 });
 
 export default (resource: string) => {
@@ -10,6 +11,7 @@ export default (resource: string) => {
       return repository.get(resource);
     },
     login(argEmail: string, argPassword: string) {
+      repository.get("sanctum/csrf-cookie");
       return repository.post(resource, {
         email: argEmail,
         password: argPassword,
