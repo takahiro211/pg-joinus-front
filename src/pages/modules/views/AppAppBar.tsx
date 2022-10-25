@@ -13,17 +13,18 @@ import DrawerMenu from "../components/DrawerMenu";
 import { useEffect, useState } from "react";
 import { RepositoryFactory } from "../../../api/RepositoryFactory";
 import { useCookies } from "react-cookie";
+import { useAuth } from "../../../utils/AuthContext";
 
 function AppAppBar() {
-  const [loginState, setLoginState] = useState(false);
+  const { isAuth, setIsAuth } = useAuth();
   const [open, setOpen] = useState(false);
-  const [cookies, removeCookie] = useCookies(["XSRF-TOKEN"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["XSRF-TOKEN"]);
   useEffect(() => {
     const value = cookies["XSRF-TOKEN"];
     if (value == "false" || value === void 0) {
-      setLoginState(false);
+      setIsAuth(false);
     } else {
-      setLoginState(true);
+      setIsAuth(true);
     }
   }, []);
 
@@ -38,8 +39,8 @@ function AppAppBar() {
     try {
       const logoutResponse = await userRepository.index();
       console.log("logout", logoutResponse.status);
-      removeCookie("XSRF-TOKEN", false);
-      setLoginState(false);
+      removeCookie("XSRF-TOKEN");
+      setIsAuth(false);
       setOpen(true);
       navigate("/");
     } catch (e) {}
@@ -56,8 +57,7 @@ function AppAppBar() {
     setOpen(false);
   };
 
-  return loginState ? (
-    // ログイン済みの場合
+  return (
     <div>
       <AppBar position="fixed">
         <Container maxWidth="lg">
@@ -73,13 +73,22 @@ function AppAppBar() {
                 <DrawerMenu />
               </Hidden>
               <Hidden mdDown>
-                <Typography
-                  color="inherit"
-                  onClick={handleLogout}
-                  style={appBarLinkSignIn}
-                >
-                  ログアウトします！
-                </Typography>
+                {/** ログイン済みの場合 */}
+                <div style={{ display: !isAuth ? "none" : "" }}>
+                  <Typography
+                    color="inherit"
+                    onClick={handleLogout}
+                    style={appBarLinkSignIn}
+                  >
+                    ログアウトします！
+                  </Typography>
+                </div>
+                {/** 未ログイン時 */}
+                <div style={{ display: isAuth ? "none" : "" }}>
+                  <Link color="inherit" to="/sign-in" style={appBarLinkSignIn}>
+                    {Labels.SIGN_IN}
+                  </Link>
+                </div>
                 <Link color="inherit" to="sign-up" style={appBarLinkSignUp}>
                   {Labels.SIGN_UP}
                 </Link>
@@ -89,43 +98,13 @@ function AppAppBar() {
         </Container>
       </AppBar>
       <Toolbar />
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          ログアウトしました
-        </Alert>
-      </Snackbar>
-    </div>
-  ) : (
-    // 未ログイン時
-    <div>
-      <AppBar position="fixed">
-        <Container maxWidth="lg">
-          <Toolbar sx={{ justifyContent: "space-between" }}>
-            <Box sx={{ flex: 1 }} />
-            <h1>
-              <Link color="inherit" to="/" style={appBarTitle}>
-                {AppStrings.APP_NAME}
-              </Link>
-            </h1>
-            <Box sx={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
-              <Hidden mdUp>
-                <DrawerMenu />
-              </Hidden>
-              <Hidden mdDown>
-                <Link color="inherit" to="/sign-in" style={appBarLinkSignIn}>
-                  {Labels.SIGN_IN}
-                </Link>
-                <Link color="inherit" to="sign-up" style={appBarLinkSignUp}>
-                  {Labels.SIGN_UP}
-                </Link>
-              </Hidden>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-      <Toolbar />
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert onClose={handleClose} severity="info" sx={{ width: "100%" }}>
           ログアウトしました
         </Alert>
       </Snackbar>

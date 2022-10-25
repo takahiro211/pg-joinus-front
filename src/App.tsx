@@ -7,6 +7,7 @@ import { ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Route from "./routes/Route";
 import { CookiesProvider } from "react-cookie";
+import { AuthProvider } from "./utils/AuthContext";
 
 function App() {
   // Component
@@ -15,11 +16,13 @@ function App() {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <AppAppBar />
-        <AnimatePresence exitBeforeEnter>
-          <Route />
-        </AnimatePresence>
-        <AppFooter />
+        <AuthProvider>
+          <AppAppBar />
+          <AnimatePresence exitBeforeEnter>
+            <Route />
+          </AnimatePresence>
+          <AppFooter />
+        </AuthProvider>
       </ThemeProvider>
     </CookiesProvider>
   );
