@@ -49,12 +49,7 @@ function SignUp() {
     password: string
   ) => {
     try {
-      const registerResponse = await userRepository.register(
-        name,
-        email,
-        password
-      );
-      console.log("register", registerResponse.status);
+      await userRepository.register(name, email, password);
       setIsAuth(true);
       navigate("/mypage");
     } catch (e) {

@@ -44,8 +44,7 @@ function SignIn() {
   const { setIsAuth } = useAuth();
   const userResponse = async (email: string, password: string) => {
     try {
-      const loginResponse = await userRepository.login(email, password);
-      console.log("login", loginResponse.status);
+      await userRepository.login(email, password);
       setIsAuth(true);
       navigate("/mypage");
     } catch (e) {

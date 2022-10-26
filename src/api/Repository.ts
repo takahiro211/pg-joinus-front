@@ -20,14 +20,8 @@ export default (resource: string) => {
     },
     // 登録処理
     register(argName: string, argEmail: string, argPassword: string) {
-      apiRepository.post(resource, {
+      return apiRepository.post(resource, {
         name: argName,
-        email: argEmail,
-        password: argPassword,
-      });
-      // 登録後ログイン
-      repository.get("sanctum/csrf-cookie");
-      return apiRepository.post("login", {
         email: argEmail,
         password: argPassword,
       });
