@@ -8,6 +8,7 @@ import ForgotPassword from "../pages/ForgotPassword";
 import MyPage from "../pages/MyPage";
 import Terms from "../pages/Terms";
 import CheckAuth from "./CheckAuth";
+import Users from "../pages/Users";
 
 function AllRoute() {
   const location = useLocation();
@@ -26,6 +27,14 @@ function AllRoute() {
         element={
           <CheckAuth>
             <Terms />
+          </CheckAuth>
+        }
+      />
+      <Route
+        path="users"
+        element={
+          <CheckAuth>
+            <Users />
           </CheckAuth>
         }
       />

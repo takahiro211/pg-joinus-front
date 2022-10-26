@@ -1,4 +1,5 @@
 import axios from "axios";
+import { UsersEntity } from "./entities/UsersEntity";
 
 // fqdn
 const fqdn: string | undefined = process.env.REACT_APP_API_FQDN;
@@ -34,14 +35,9 @@ export default (resource: string) => {
         password: argPassword,
       });
     },
-    show(id: number) {
-      return apiRepository.get(`${resource}/${id}`);
-    },
-    post(payload: any) {
-      return apiRepository.post(resource, payload);
-    },
-    delete(id: number) {
-      return apiRepository.delete(`${resource}/${id}`);
+    // ユーザー一覧取得
+    users() {
+      return apiRepository.get<UsersEntity[]>(resource, {});
     },
   };
 };

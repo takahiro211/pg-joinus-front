@@ -87,7 +87,15 @@ function AppAppBar() {
                     onClick={handleLogout}
                     style={appBarLinkSignIn}
                   >
-                    ログアウトします！
+                    {Labels.LOGOUT}
+                  </Button>
+                  <Button
+                    color="inherit"
+                    to="users"
+                    style={appBarLinkSignIn}
+                    component={Link}
+                  >
+                    {Labels.USERS_LIST}
                   </Button>
                 </div>
                 {/** 未ログイン時 */}
@@ -100,15 +108,15 @@ function AppAppBar() {
                   >
                     {Labels.SIGN_IN}
                   </Button>
+                  <Button
+                    color="inherit"
+                    to="sign-up"
+                    style={appBarLinkSignUp}
+                    component={Link}
+                  >
+                    {Labels.SIGN_UP}
+                  </Button>
                 </div>
-                <Button
-                  color="inherit"
-                  to="sign-up"
-                  style={appBarLinkSignUp}
-                  component={Link}
-                >
-                  {Labels.SIGN_UP}
-                </Button>
               </Hidden>
             </Box>
           </Toolbar>

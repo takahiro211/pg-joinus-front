@@ -15,6 +15,8 @@ export const Labels = {
   NOT_REGISTERED: "会員登録がお済みでない方はこちら",
   FORGOT_PASSWORD_USER: "パスワードをお忘れの方",
   SIGN_IN: "ログイン",
+  LOGOUT: "ログアウト",
+  USERS_LIST: "新着ユーザー",
   FORGOT_PASSWORD: "パスワードリセット",
   FORGOT_PASSWORD_DESCRIPTION:
     "メールアドレスを入力してください。お送りするリンクよりパスワードリセットを実施してください。",
@@ -27,6 +29,8 @@ export const Labels = {
   ABOUT: "サイトについて",
   CHANGE_THEME: "テーマを切り替える",
   CLOSE_MENU: "メニューを閉じる",
+  USERS_TABEL_HEAD_USER_NAME: "ユーザー名",
+  USERS_TABEL_HEAD_USER_EST: "登録日",
 };
 
 export const ProductIntro = {
