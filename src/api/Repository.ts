@@ -1,12 +1,15 @@
 import axios from "axios";
 
-const apiRepository = axios.create({
-  baseURL: "https://api.v2.ytmemo.com/api",
+// fqdn
+const fqdn: string | undefined = process.env.REACT_APP_API_FQDN;
+
+const repository = axios.create({
+  baseURL: fqdn,
   withCredentials: true,
 });
 
-const repository = axios.create({
-  baseURL: "https://api.v2.ytmemo.com",
+const apiRepository = axios.create({
+  baseURL: fqdn + "/api",
   withCredentials: true,
 });
 
@@ -15,6 +18,21 @@ export default (resource: string) => {
     index() {
       return apiRepository.get(resource);
     },
+    // 登録処理
+    register(argName: string, argEmail: string, argPassword: string) {
+      apiRepository.post(resource, {
+        name: argName,
+        email: argEmail,
+        password: argPassword,
+      });
+      // 登録後ログイン
+      repository.get("sanctum/csrf-cookie");
+      return apiRepository.post("login", {
+        email: argEmail,
+        password: argPassword,
+      });
+    },
+    // ログイン
     login(argEmail: string, argPassword: string) {
       repository.get("sanctum/csrf-cookie");
       return apiRepository.post(resource, {

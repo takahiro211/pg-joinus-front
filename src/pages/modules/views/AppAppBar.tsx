@@ -1,7 +1,14 @@
 import Box from "@mui/material/Box";
 import AppBar from "../components/AppBar";
 import Toolbar from "../components/Toolbar";
-import { Alert, Container, Hidden, Snackbar, Typography } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Container,
+  Hidden,
+  Snackbar,
+  Typography,
+} from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { AppStrings, Labels } from "../../../utils/Consts";
 import {
@@ -75,23 +82,33 @@ function AppAppBar() {
               <Hidden mdDown>
                 {/** ログイン済みの場合 */}
                 <div style={{ display: !isAuth ? "none" : "" }}>
-                  <Typography
+                  <Button
                     color="inherit"
                     onClick={handleLogout}
                     style={appBarLinkSignIn}
                   >
                     ログアウトします！
-                  </Typography>
+                  </Button>
                 </div>
                 {/** 未ログイン時 */}
                 <div style={{ display: isAuth ? "none" : "" }}>
-                  <Link color="inherit" to="/sign-in" style={appBarLinkSignIn}>
+                  <Button
+                    color="inherit"
+                    to="/sign-in"
+                    style={appBarLinkSignIn}
+                    component={Link}
+                  >
                     {Labels.SIGN_IN}
-                  </Link>
+                  </Button>
                 </div>
-                <Link color="inherit" to="sign-up" style={appBarLinkSignUp}>
+                <Button
+                  color="inherit"
+                  to="sign-up"
+                  style={appBarLinkSignUp}
+                  component={Link}
+                >
                   {Labels.SIGN_UP}
-                </Link>
+                </Button>
               </Hidden>
             </Box>
           </Toolbar>

@@ -1,6 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Field, Form, FormSpy } from "react-final-form";
 import Typography from "./modules/components/Typography";
 import AppForm from "./modules/views/AppForm";
@@ -11,9 +11,14 @@ import FormFeedback from "./modules/form/FormFeedback";
 import withRoot from "../withRoot";
 import { FormItems, Labels } from "../utils/Consts";
 import { btnStyle } from "../utils/Styles";
+import { RepositoryFactory } from "../api/RepositoryFactory";
+import { useAuth } from "../utils/AuthContext";
+import { Alert, Collapse, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 function SignUp() {
   const [sent, setSent] = React.useState(false);
+  const [toastOpen, setOpen] = React.useState(false);
 
   const validate = (values: { [index: string]: string }) => {
     const errors = required(["userName", "email", "password"], values);
@@ -28,8 +33,34 @@ function SignUp() {
     return errors;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (values: { "": string }) => {
     setSent(true);
+    const value = Object.entries(values).map((x) => x);
+    userResponse(value[0][1], value[1][1], value[2][1]);
+  };
+
+  // API
+  const userRepository = RepositoryFactory.get("register");
+  const navigate = useNavigate();
+  const { setIsAuth } = useAuth();
+  const userResponse = async (
+    name: string,
+    email: string,
+    password: string
+  ) => {
+    try {
+      const registerResponse = await userRepository.register(
+        name,
+        email,
+        password
+      );
+      console.log("register", registerResponse.status);
+      setIsAuth(true);
+      navigate("/mypage");
+    } catch (e) {
+      setOpen(true);
+      setSent(false);
+    }
   };
 
   return (
@@ -55,12 +86,35 @@ function SignUp() {
               noValidate
               sx={{ mt: 6 }}
             >
+              <Collapse in={toastOpen}>
+                <Alert
+                  severity="error"
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        setOpen(false);
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                  sx={{ mb: 2 }}
+                >
+                  <strong>登録に失敗しました。</strong>
+                  <br />
+                  入力内容をご確認ください。
+                </Alert>
+              </Collapse>
               <Field
                 component={RFTextField}
                 disabled={submitting || sent}
                 autoComplete="given-name"
                 fullWidth
                 label={FormItems.USER_NAME}
+                placeholder={FormItems.PLACEHOLDER_USER_NAME}
                 name="userName"
                 required
               />
@@ -70,6 +124,7 @@ function SignUp() {
                 disabled={submitting || sent}
                 fullWidth
                 label={FormItems.EMAIL}
+                placeholder={FormItems.PLACEHOLDER_USER_EMAIL}
                 margin="normal"
                 name="email"
                 required

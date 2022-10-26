@@ -13,7 +13,6 @@ import { FormItems, Labels } from "../utils/Consts";
 import { RepositoryFactory } from "../api/RepositoryFactory";
 import { Alert, Collapse, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import AppAppBar from "./modules/views/AppAppBar";
 import { useAuth } from "../utils/AuthContext";
 
 function SignIn() {

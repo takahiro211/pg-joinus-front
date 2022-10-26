@@ -57,6 +57,9 @@ export const FormItems = {
   USER_NAME: "ユーザー名",
   EMAIL: "メールアドレス",
   PASSWORD: "パスワード",
+  PLACEHOLDER_USER_NAME: "たろう / tarou 等",
+  PLACEHOLDER_USER_EMAIL: "user@example.com",
+  PLACEHOLDER_USER_PASSWORD: "",
 };
 
 export const ErrorMessages = {
