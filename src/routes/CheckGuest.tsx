@@ -7,15 +7,15 @@ type Props = {
   children?: React.ReactNode;
 };
 
-const CheckAuth: FC<Props> = ({ children }) => {
+const CheckGuest: FC<Props> = ({ children }) => {
   // ログイン状態をクッキーから取得
   return GetAuthState() ? (
-    <>{children}</>
-  ) : (
     <>
-      <Navigate to="/sign-in" />
+      <Navigate to="/mypage" />
     </>
+  ) : (
+    <>{children}</>
   );
 };
 
-export default CheckAuth;
+export default CheckGuest;

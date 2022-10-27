@@ -9,24 +9,54 @@ import MyPage from "../pages/MyPage";
 import Terms from "../pages/Terms";
 import CheckAuth from "./CheckAuth";
 import Users from "../pages/Users";
+import CheckGuest from "./CheckGuest";
 
 function AllRoute() {
   const location = useLocation();
   return (
     <Routes location={location} key={location.pathname}>
-      // --- Guest ---
-      <Route path="/" element={<Home />} />
-      <Route path="sign-in" element={<SignIn />} />
-      <Route path="sign-up" element={<SignUp />} />
+      // --- BOTH ---
+      <Route path="terms" element={<Terms />} />
       <Route path="privacy" element={<Privacy />} />
-      <Route path="forgot-password" element={<ForgotPassword />} />
-      <Route path="mypage" element={<MyPage />} />
+      // --- Guest ---
+      <Route
+        path="/"
+        element={
+          <CheckGuest>
+            <Home />
+          </CheckGuest>
+        }
+      />
+      <Route
+        path="sign-in"
+        element={
+          <CheckGuest>
+            <SignIn />
+          </CheckGuest>
+        }
+      />
+      <Route
+        path="sign-up"
+        element={
+          <CheckGuest>
+            <SignUp />
+          </CheckGuest>
+        }
+      />
+      <Route
+        path="forgot-password"
+        element={
+          <CheckGuest>
+            <ForgotPassword />
+          </CheckGuest>
+        }
+      />
       // --- Private ---
       <Route
-        path="terms"
+        path="mypage"
         element={
           <CheckAuth>
-            <Terms />
+            <MyPage />
           </CheckAuth>
         }
       />
