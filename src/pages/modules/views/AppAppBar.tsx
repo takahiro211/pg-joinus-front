@@ -1,14 +1,7 @@
 import Box from "@mui/material/Box";
 import AppBar from "../components/AppBar";
 import Toolbar from "../components/Toolbar";
-import {
-  Alert,
-  Button,
-  Container,
-  Hidden,
-  Snackbar,
-  Typography,
-} from "@mui/material";
+import { Alert, Button, Container, Hidden, Snackbar } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { AppStrings, Labels } from "../../../utils/Consts";
 import {
@@ -20,11 +13,15 @@ import DrawerMenu from "../components/DrawerMenu";
 import { useEffect, useState } from "react";
 import { RepositoryFactory } from "../../../api/RepositoryFactory";
 import { useCookies } from "react-cookie";
+import { CookieSetOptions } from "universal-cookie";
 import { useAuth } from "../../../utils/AuthContext";
 
 function AppAppBar() {
   const { isAuth, setIsAuth } = useAuth();
   const [open, setOpen] = useState(false);
+  const options: CookieSetOptions = {
+    domain: process.env.REACT_APP_COOKIE_DOMAIN,
+  };
   const [cookies, setCookie, removeCookie] = useCookies(["XSRF-TOKEN"]);
   useEffect(() => {
     const value = cookies["XSRF-TOKEN"];
@@ -46,7 +43,8 @@ function AppAppBar() {
     try {
       const logoutResponse = await userRepository.index();
       console.log("logout", logoutResponse.status);
-      removeCookie("XSRF-TOKEN");
+      console.log("options", options);
+      removeCookie("XSRF-TOKEN", options);
       setIsAuth(false);
       setOpen(true);
       navigate("/");
