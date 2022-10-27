@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import { Labels } from "../utils/Consts";
 import { motion } from "framer-motion";
+import { DateFormat } from "../utils/Util";
 
 function Users() {
   const terms = "terms";
@@ -50,7 +51,7 @@ function Users() {
             新着ユーザー
           </Typography>
           <TableContainer component={Paper} sx={{ mt: 4 }}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
                   <TableCell>{Labels.USERS_TABEL_HEAD_USER_NAME}</TableCell>
@@ -64,7 +65,7 @@ function Users() {
                       {user.name}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {user.created_at}
+                      {DateFormat(user.created_at)}
                     </TableCell>
                   </TableRow>
                 ))}

@@ -36,3 +36,15 @@ export function GetAuthState() {
   }
   return ret;
 }
+
+export function DateFormat(dateTime: Date): string {
+  const newDate = new Date(dateTime);
+  const year = newDate.getFullYear();
+  const month = 1 + newDate.getMonth();
+  const month2 = month < 10 ? "0" + month : month;
+  const date = newDate.getDate();
+  const date2 = date < 10 ? "0" + date : date;
+
+  console.log(`${year}/${month2}/${date2}`);
+  return `${year}年${month2}月${date2}日`;
+}

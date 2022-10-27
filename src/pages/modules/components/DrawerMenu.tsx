@@ -13,12 +13,22 @@ import CloseIcon from "@mui/icons-material/Close";
 import { appBarMenuBtn, menuItemLink } from "../../../utils/Styles";
 import { Labels } from "../../../utils/Consts";
 import { Login } from "@mui/icons-material";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PeopleIcon from "@mui/icons-material/People";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../utils/AuthContext";
+import { RepositoryFactory } from "../../../api/RepositoryFactory";
+import { CookieSetOptions } from "universal-cookie";
+import { useCookies } from "react-cookie";
+import PersonIcon from "@mui/icons-material/Person";
 
 type Anchor = "top" | "left" | "bottom" | "right";
 
-export default function DrawerMenu() {
+export default function DrawerMenu(props: any) {
+  const { isAuth, setIsAuth } = useAuth();
+  const [cookies, setCookie, removeCookie] = useCookies(["XSRF-TOKEN"]);
+
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -40,8 +50,65 @@ export default function DrawerMenu() {
       setState({ ...state, [anchor]: open });
     };
 
+  const handleLogout = () => {
+    userResponse();
+  };
+
+  const options: CookieSetOptions = {
+    domain: process.env.REACT_APP_COOKIE_DOMAIN,
+  };
+
+  // API ログアウト処理
+  const userRepository = RepositoryFactory.get("logout");
+  const navigate = useNavigate();
+  const userResponse = async () => {
+    try {
+      const logoutResponse = await userRepository.index();
+      console.log("logout", logoutResponse.status);
+      console.log("options", options);
+      removeCookie("XSRF-TOKEN", options);
+      setIsAuth(false);
+      props.setOpen(true);
+      navigate("/");
+    } catch (e) {}
+  };
+
   const getListItem = (item: string) => (
     <Box>
+      {item === Labels.MY_PAGE && (
+        <Link to="mypage" style={menuItemLink}>
+          <ListItem key={item} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+      )}
+      {item === Labels.USERS_LIST && (
+        <Link to="users" style={menuItemLink}>
+          <ListItem key={item} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+      )}
+      {item === Labels.LOGOUT && (
+        <ListItem key={item} disablePadding>
+          <ListItemButton onClick={handleLogout}>
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary={item} />
+          </ListItemButton>
+        </ListItem>
+      )}
       {item === Labels.SIGN_IN && (
         <Link to="sign-in" style={menuItemLink}>
           <ListItem key={item} disablePadding>
@@ -87,7 +154,16 @@ export default function DrawerMenu() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {[Labels.SIGN_IN, Labels.SIGN_UP].map((text) => getListItem(text))}
+        {/** ログイン済みの場合 */}
+        <div style={{ display: !isAuth ? "none" : "" }}>
+          {[Labels.MY_PAGE, Labels.USERS_LIST, Labels.LOGOUT].map((text) =>
+            getListItem(text)
+          )}
+        </div>
+        {/** 未ログイン時 */}
+        <div style={{ display: isAuth ? "none" : "" }}>
+          {[Labels.SIGN_IN, Labels.SIGN_UP].map((text) => getListItem(text))}
+        </div>
       </List>
       <Divider />
       <List>{[Labels.CLOSE_MENU].map((text) => getListItem(text))}</List>

@@ -31,6 +31,7 @@ export const Labels = {
   CLOSE_MENU: "メニューを閉じる",
   USERS_TABEL_HEAD_USER_NAME: "ユーザー名",
   USERS_TABEL_HEAD_USER_EST: "登録日",
+  MY_PAGE: "マイページ",
 };
 
 export const ProductIntro = {
