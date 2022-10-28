@@ -22,6 +22,7 @@ import { RepositoryFactory } from "../../../api/RepositoryFactory";
 import { CookieSetOptions } from "universal-cookie";
 import { useCookies } from "react-cookie";
 import PersonIcon from "@mui/icons-material/Person";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 type Anchor = "top" | "left" | "bottom" | "right";
 
@@ -58,7 +59,9 @@ export default function DrawerMenu(props: any) {
     domain: process.env.REACT_APP_COOKIE_DOMAIN,
   };
 
-  // API ログアウト処理
+  /**
+   * API ログアウト処理
+   */
   const userRepository = RepositoryFactory.get("logout");
   const navigate = useNavigate();
   const userResponse = async () => {
@@ -73,6 +76,39 @@ export default function DrawerMenu(props: any) {
     } catch (e) {}
   };
 
+  /**
+   * メニューの並び
+   */
+  const list = (anchor: Anchor) => (
+    <Box
+      sx={{ width: 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {/** ログイン済みの場合 */}
+        <div style={{ display: !isAuth ? "none" : "" }}>
+          {[
+            Labels.MY_PAGE,
+            Labels.USERS_LIST,
+            Labels.LATEST_PROJECT_LIST,
+            Labels.LOGOUT,
+          ].map((text) => getListItem(text))}
+        </div>
+        {/** 未ログイン時 */}
+        <div style={{ display: isAuth ? "none" : "" }}>
+          {[Labels.SIGN_IN, Labels.SIGN_UP].map((text) => getListItem(text))}
+        </div>
+      </List>
+      <Divider />
+      <List>{[Labels.CLOSE_MENU].map((text) => getListItem(text))}</List>
+    </Box>
+  );
+
+  /**
+   * 全ての項目を定義
+   */
   const getListItem = (item: string) => (
     <Box>
       {item === Labels.MY_PAGE && (
@@ -143,30 +179,18 @@ export default function DrawerMenu(props: any) {
           </ListItemButton>
         </ListItem>
       )}
-    </Box>
-  );
-
-  const list = (anchor: Anchor) => (
-    <Box
-      sx={{ width: 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {/** ログイン済みの場合 */}
-        <div style={{ display: !isAuth ? "none" : "" }}>
-          {[Labels.MY_PAGE, Labels.USERS_LIST, Labels.LOGOUT].map((text) =>
-            getListItem(text)
-          )}
-        </div>
-        {/** 未ログイン時 */}
-        <div style={{ display: isAuth ? "none" : "" }}>
-          {[Labels.SIGN_IN, Labels.SIGN_UP].map((text) => getListItem(text))}
-        </div>
-      </List>
-      <Divider />
-      <List>{[Labels.CLOSE_MENU].map((text) => getListItem(text))}</List>
+      {item === Labels.LATEST_PROJECT_LIST && (
+        <Link to="projects" style={menuItemLink}>
+          <ListItem key={item} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <GitHubIcon />
+              </ListItemIcon>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+      )}
     </Box>
   );
 

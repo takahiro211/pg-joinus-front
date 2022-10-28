@@ -22,7 +22,6 @@ import { motion } from "framer-motion";
 import { DateFormat } from "../utils/Util";
 
 function Users() {
-  const terms = "terms";
   const [users, setUsers] = React.useState<UsersEntity[]>([]);
 
   React.useEffect(() => {

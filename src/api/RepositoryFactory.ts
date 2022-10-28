@@ -3,6 +3,7 @@ import LoginRepository from "./repositories/LoginRepository";
 import LogoutRepository from "./repositories/LogoutRepository";
 import RegisterRepository from "./repositories/RegisterRepository";
 import UsersRepository from "./repositories/UsersRepository";
+import GuestPostsRepository from "./repositories/GuestPostsRepository";
 
 interface repositoryObject {
   [name: string]: any;
@@ -14,6 +15,7 @@ const repositories: repositoryObject = {
   login: LoginRepository,
   user: UserRepository,
   users: UsersRepository,
+  guestPosts: GuestPostsRepository,
 };
 
 export const RepositoryFactory = {

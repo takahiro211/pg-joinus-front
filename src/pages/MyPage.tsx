@@ -1,10 +1,10 @@
 import * as React from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import Markdown from "./modules/components/Markdown";
 import Typography from "./modules/components/Typography";
 import withRoot from "../withRoot";
 import { Labels } from "../utils/Consts";
+import ProductCategories from "./modules/views/ProductCategories";
 
 function MyPage() {
   const terms = "terms";
@@ -15,9 +15,10 @@ function MyPage() {
           <Typography variant="h3" gutterBottom marked="center" align="center">
             {Labels.MY_PAGE}
           </Typography>
-          <Markdown>{terms}</Markdown>
+          こんにちは。logged in.
         </Box>
       </Container>
+      <ProductCategories />
     </React.Fragment>
   );
 }

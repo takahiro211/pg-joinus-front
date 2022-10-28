@@ -30,7 +30,10 @@ export const Labels = {
   CHANGE_THEME: "テーマを切り替える",
   CLOSE_MENU: "メニューを閉じる",
   USERS_TABEL_HEAD_USER_NAME: "ユーザー名",
+  USERS_TABEL_HEAD_POST_TITLE: "タイトル",
+  USERS_TABEL_HEAD_POST_DESCRIPTION: "プロジェクトの概要",
   USERS_TABEL_HEAD_USER_EST: "登録日",
+  USERS_TABEL_HEAD_POST_DATE: "投稿日",
   MY_PAGE: "マイページ",
 };
 

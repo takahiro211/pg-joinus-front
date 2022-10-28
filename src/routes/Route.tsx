@@ -10,6 +10,7 @@ import Terms from "../pages/Terms";
 import CheckAuth from "./CheckAuth";
 import Users from "../pages/Users";
 import CheckGuest from "./CheckGuest";
+import Projects from "../pages/Projects";
 
 function AllRoute() {
   const location = useLocation();
@@ -65,6 +66,14 @@ function AllRoute() {
         element={
           <CheckAuth>
             <Users />
+          </CheckAuth>
+        }
+      />
+      <Route
+        path="projects"
+        element={
+          <CheckAuth>
+            <Projects />
           </CheckAuth>
         }
       />
