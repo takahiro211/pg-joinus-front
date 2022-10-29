@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ProjectDetailEntity } from "./entities/ProjectDetailEntity";
 import { UsersEntity } from "./entities/UsersEntity";
 
 // fqdn
@@ -38,6 +39,14 @@ export default (resource: string) => {
     // ユーザー一覧取得
     users() {
       return apiRepository.get<UsersEntity[]>(resource, {});
+    },
+    // プロジェクト詳細取得
+    postDetail(postId: string) {
+      return apiRepository.get<ProjectDetailEntity>(resource, {
+        params: {
+          postId: postId,
+        },
+      });
     },
   };
 };

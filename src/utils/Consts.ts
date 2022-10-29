@@ -35,6 +35,8 @@ export const Labels = {
   USERS_TABEL_HEAD_USER_EST: "登録日",
   USERS_TABEL_HEAD_POST_DATE: "投稿日",
   MY_PAGE: "マイページ",
+  SKILLS: "スキル",
+  FREE_TAGS: "タグ",
 };
 
 export const ProductIntro = {

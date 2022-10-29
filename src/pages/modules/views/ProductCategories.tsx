@@ -26,6 +26,7 @@ import { RepositoryFactory } from "../../../api/RepositoryFactory";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ProjectCard from "../components/ProjectCard";
 
 export default function ProductCategories() {
   const [posts, setPosts] = useState<PostsEntity[]>([]);
@@ -75,47 +76,7 @@ export default function ProductCategories() {
         <Slider {...sliderSettings}>
           {posts.map((post) => (
             <>
-              <Card
-                sx={{ minWidth: 10, mt: 2, mb: 2 }}
-                style={{ marginRight: 12, marginLeft: 12 }}
-              >
-                <CardActionArea>
-                  <CardContent>
-                    <Typography
-                      sx={{ fontSize: 14 }}
-                      color="text.secondary"
-                      gutterBottom
-                    >
-                      {DateFormat(post.created_at)}
-                    </Typography>
-                    <Typography variant="h5" component="div">
-                      {post.title}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      {post.description}
-                    </Typography>
-                    <Typography variant="body2">
-                      {JSON.parse(post.skill).map((skill: any) => (
-                        <Chip
-                          variant="outlined"
-                          color="success"
-                          size="small"
-                          label={skill}
-                          sx={{ mt: 0.5, mr: 0.4 }}
-                        />
-                      ))}
-                      {JSON.parse(post.free_tag).map((tag: any) => (
-                        <Chip
-                          variant="outlined"
-                          size="small"
-                          label={tag}
-                          sx={{ mt: 0.5, mr: 0.4 }}
-                        />
-                      ))}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
+              <ProjectCard post={post} />
               <Box sx={{ ml: 12, mr: 12 }}></Box>
             </>
           ))}

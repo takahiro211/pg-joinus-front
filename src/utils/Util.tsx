@@ -24,7 +24,6 @@ export function GetAuthState() {
   let ret: boolean = false;
   try {
     const [cookies] = useCookies(["XSRF-TOKEN"]);
-    console.log(cookies["XSRF-TOKEN"]);
     const value = cookies["XSRF-TOKEN"];
     if (value == "false" || value === void 0) {
       ret = false;
@@ -44,7 +43,5 @@ export function DateFormat(dateTime: Date): string {
   const month2 = month < 10 ? "0" + month : month;
   const date = newDate.getDate();
   const date2 = date < 10 ? "0" + date : date;
-
-  console.log(`${year}/${month2}/${date2}`);
   return `${year}年${month2}月${date2}日`;
 }
