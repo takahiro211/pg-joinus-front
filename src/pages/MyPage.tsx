@@ -5,9 +5,9 @@ import Typography from "./modules/components/Typography";
 import withRoot from "../withRoot";
 import { Labels } from "../utils/Consts";
 import ProductCategories from "./modules/views/ProductCategories";
+import ProductSmokingHero from "./modules/views/ProductSmokingHero";
 
 function MyPage() {
-  const terms = "terms";
   return (
     <React.Fragment>
       <Container>
@@ -19,6 +19,7 @@ function MyPage() {
         </Box>
       </Container>
       <ProductCategories />
+      <ProductSmokingHero />
     </React.Fragment>
   );
 }

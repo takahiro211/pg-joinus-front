@@ -67,7 +67,7 @@ export default function ProductCategories() {
   };
 
   return (
-    <Container component="section" sx={{ mt: 8, mb: 4 }}>
+    <Container component="section" sx={{ mt: 8, mb: 20 }}>
       <Typography variant="h4" marked="center" align="center" component="h2">
         {Labels.LATEST_PROJECT_LIST}
       </Typography>

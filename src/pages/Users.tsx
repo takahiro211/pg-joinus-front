@@ -20,6 +20,7 @@ import {
 import { Labels } from "../utils/Consts";
 import { motion } from "framer-motion";
 import { DateFormat } from "../utils/Util";
+import ProductSmokingHero from "./modules/views/ProductSmokingHero";
 
 function Users() {
   const [users, setUsers] = React.useState<UsersEntity[]>([]);
@@ -73,6 +74,7 @@ function Users() {
           </TableContainer>
         </Box>
       </Container>
+      <ProductSmokingHero />
     </React.Fragment>
   );
 }
