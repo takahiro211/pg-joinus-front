@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Typography from "../components/Typography";
 import { Labels } from "../../../utils/Consts";
+import { Link } from "react-router-dom";
 
 function ProductSmokingHero() {
   return (
@@ -17,6 +18,8 @@ function ProductSmokingHero() {
       }}
     >
       <Button
+        component={Link}
+        to="/faq"
         sx={{
           border: "4px solid currentColor",
           borderRadius: 0,

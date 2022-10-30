@@ -12,6 +12,7 @@ import Users from "../pages/Users";
 import CheckGuest from "./CheckGuest";
 import Projects from "../pages/Projects";
 import ProjectDetail from "../pages/ProjectDetail";
+import Faq from "../pages/Faq";
 
 function AllRoute() {
   const location = useLocation();
@@ -20,6 +21,7 @@ function AllRoute() {
       // --- BOTH ---
       <Route path="terms" element={<Terms />} />
       <Route path="privacy" element={<Privacy />} />
+      <Route path="faq" element={<Faq />} />
       // --- Guest ---
       <Route
         path="/"
