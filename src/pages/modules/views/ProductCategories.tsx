@@ -68,20 +68,22 @@ export default function ProductCategories() {
   };
 
   return (
-    <Container component="section" sx={{ mt: 8, mb: 20 }}>
-      <Typography variant="h4" marked="center" align="center" component="h2">
-        {Labels.LATEST_PROJECT_LIST}
-      </Typography>
-      <Box sx={{ mt: 7, mb: 12 }}>
-        <Slider {...sliderSettings}>
-          {posts.map((post) => (
-            <>
-              <ProjectCard post={post} />
-              <Box sx={{ ml: 12, mr: 12 }}></Box>
-            </>
-          ))}
-        </Slider>
-      </Box>
+    <Container>
+      <Container component="section" sx={{ mt: 8, mb: 20 }}>
+        <Typography variant="h4" marked="center" align="center" component="h2">
+          {Labels.LATEST_PROJECT_LIST}
+        </Typography>
+        <Box sx={{ mt: 7, mb: 12 }}>
+          <Slider {...sliderSettings}>
+            {posts.map((post) => (
+              <>
+                <ProjectCard post={post} />
+                <Box sx={{ ml: 12, mr: 12 }}></Box>
+              </>
+            ))}
+          </Slider>
+        </Box>
+      </Container>
     </Container>
   );
 }

@@ -8,7 +8,7 @@ import withRoot from "../withRoot";
 import ProductCategories from "./modules/views/ProductCategories";
 import Typography from "./modules/components/Typography";
 import ProjectCard from "./modules/components/ProjectCard";
-import ProjectDetailCard from "./modules/components/ProjectDetailCard";
+import ProjectDetailCard from "./modules/components/ProjectDetailContent";
 import { useParams } from "react-router-dom";
 import { LegendToggle } from "@mui/icons-material";
 

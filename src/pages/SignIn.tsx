@@ -11,7 +11,7 @@ import FormFeedback from "./modules/form/FormFeedback";
 import withRoot from "../withRoot";
 import { FormItems, Labels } from "../utils/Consts";
 import { RepositoryFactory } from "../api/RepositoryFactory";
-import { Alert, Collapse, IconButton } from "@mui/material";
+import { Alert, Button, Collapse, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useAuth } from "../utils/AuthContext";
 
@@ -36,6 +36,23 @@ function SignIn() {
     setSent(true);
     const value = Object.entries(values).map((x) => x);
     userResponse(value[0][1], value[1][1]);
+  };
+
+  /**
+   * テストユーザーでログインボタン
+   */
+  const inputValEm = React.useRef<HTMLInputElement>(null);
+  const inputValPw = React.useRef<HTMLInputElement>(null);
+  const handleTestBtn = () => {
+    const testEm = "user@example.com";
+    const testPw = "password";
+    if (inputValEm.current != null && inputValPw.current != null) {
+      inputValEm.current.value = testEm;
+      inputValPw.current.value = testPw;
+    }
+    setOpen(false);
+    setSent(true);
+    userResponse(testEm, testPw);
   };
 
   // API
@@ -109,6 +126,7 @@ function SignIn() {
                 name="email"
                 required
                 size="large"
+                inputRef={inputValEm}
               />
               <Field
                 fullWidth
@@ -121,6 +139,7 @@ function SignIn() {
                 label={FormItems.PASSWORD}
                 type="password"
                 margin="normal"
+                inputRef={inputValPw}
               />
               <FormSpy subscription={{ submitError: true }}>
                 {({ submitError }) =>
@@ -131,6 +150,16 @@ function SignIn() {
                   ) : null
                 }
               </FormSpy>
+              <Typography align="center" sx={{ mt: 1 }}>
+                <Button
+                  disabled={submitting || sent}
+                  onClick={(e: any) => {
+                    handleTestBtn();
+                  }}
+                >
+                  テストユーザーでログインできます
+                </Button>
+              </Typography>
               <FormButton
                 sx={{ mt: 3, mb: 2 }}
                 disabled={submitting || sent}
