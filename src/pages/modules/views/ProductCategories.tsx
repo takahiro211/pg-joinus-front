@@ -51,6 +51,7 @@ export default function ProductCategories() {
     dots: true,
     infinite: true,
     autoplay: true,
+    arrows: false,
     speed: 320,
     slidesToShow: 3,
     slidesToScroll: 1,
