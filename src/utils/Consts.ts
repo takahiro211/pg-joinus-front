@@ -2,6 +2,23 @@ export const AppStrings = {
   APP_NAME: "PGJoinUs",
 };
 
+export const DrawerMenuLabels = {
+  DRAWER_MENU_MYPAGE: "マイページ",
+  DRAWER_MENU_PROJECTS: "プロジェクト検索",
+  DRAWER_MENU_MANAGE_POSTS: "プロジェクト投稿の管理",
+  DRAWER_MENU_FAVORITES: "お気に入り",
+  DRAWER_MENU_COMMENTS: "コメント管理",
+  DRAWER_MENU_FOLLOWER: "フォロー・フォロワー",
+  DRAWER_MENU_HELP: "ヘルプ",
+  DRAWER_MENU_TERMS: "ご利用規約",
+  DRAWER_MENU_PRIVACY: "プライバシー",
+  DRAWER_MENU_DEVELOPER: "運営者情報",
+  DRAWER_MENU_LOGOUT: "ログアウト",
+  DRAWER_MENU_LOGIN: "ログイン",
+  DRAWER_MENU_SIGNUP: "新規会員登録",
+  DRAWER_MENU_CLOSE: "メニューを閉じる",
+};
+
 export const Labels = {
   CATCH: "Feel free to join projects",
   SUBJECT: "スキルに応じたGitHubリポジトリをご紹介",
@@ -28,7 +45,6 @@ export const Labels = {
   PRIVACY: "プライバシー",
   ABOUT: "サイトについて",
   CHANGE_THEME: "テーマを切り替える",
-  CLOSE_MENU: "メニューを閉じる",
   USERS_TABEL_HEAD_USER_NAME: "ユーザー名",
   USERS_TABEL_HEAD_POST_TITLE: "タイトル",
   USERS_TABEL_HEAD_POST_DESCRIPTION: "プロジェクトの概要",

@@ -70,7 +70,11 @@ function AppAppBar() {
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <Box sx={{ flex: 1 }} />
             <h1>
-              <Link color="inherit" to="/" style={appBarTitle}>
+              <Link
+                color="inherit"
+                to={isAuth ? "/mypage" : "/"}
+                style={appBarTitle}
+              >
                 {AppStrings.APP_NAME}
               </Link>
             </h1>

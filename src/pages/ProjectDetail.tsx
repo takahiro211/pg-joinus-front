@@ -8,9 +8,10 @@ import withRoot from "../withRoot";
 import ProductCategories from "./modules/views/ProductCategories";
 import Typography from "./modules/components/Typography";
 import ProjectCard from "./modules/components/ProjectCard";
-import ProjectDetailCard from "./modules/components/ProjectDetailContent";
+import ProjectDetailContent from "./modules/components/ProjectDetailContent";
 import { useParams } from "react-router-dom";
 import { LegendToggle } from "@mui/icons-material";
+import ProjectDetailSkeleton from "./modules/skeleton/ProjectDetailSkeleton";
 
 function ProjectDetail() {
   const [posts, setPosts] = React.useState<PostsEntity[]>([]);
@@ -35,14 +36,7 @@ function ProjectDetail() {
 
   return (
     <React.Fragment>
-      {posts.map((post) => (
-        <Box sx={{ mt: 7, mb: 0 }}>
-          <Typography variant="h3" gutterBottom marked="center" align="center">
-            {post.title}
-          </Typography>
-        </Box>
-      ))}
-      {posts.length > 0 ? <ProjectDetailCard post={posts} /> : <></>}
+      <ProjectDetailContent post={posts} />
     </React.Fragment>
   );
 }

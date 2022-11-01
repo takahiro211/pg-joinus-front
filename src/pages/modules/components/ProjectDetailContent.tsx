@@ -13,20 +13,33 @@ import { Labels } from "../../../utils/Consts";
 import { DateFormat } from "../../../utils/Util";
 import TerminalIcon from "@mui/icons-material/Terminal";
 import SpeakerNotesIcon from "@mui/icons-material/SpeakerNotes";
+import ComponentTypography from "./Typography";
+import ProjectDetailSkeleton from "../skeleton/ProjectDetailSkeleton";
 
 function ProjectDetailCard(props: any) {
-  const post = props.post[0];
+  const isNoData = props.post <= 0;
+  const post = isNoData ? "" : props.post[0];
   const skills = post.skill;
   const free_tags = post.free_tag;
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
+    <Container maxWidth="md" sx={{ mt: 7 }}>
+      <Box sx={{ mt: 7, mb: 0 }}>
+        <ComponentTypography
+          variant="h3"
+          gutterBottom
+          marked="center"
+          align="center"
+        >
+          {isNoData ? <ProjectDetailSkeleton /> : post.title}
+        </ComponentTypography>
+      </Box>
       <Typography
-        sx={{ fontSize: 16, mt: 2, mb: 1, textAlign: "right" }}
+        sx={{ fontSize: 16, mt: 6, mb: 1, textAlign: "right" }}
         color="text.secondary"
         gutterBottom
       >
-        {DateFormat(post.created_at)}
+        {isNoData ? "" : DateFormat(post.created_at)}
       </Typography>
       <Divider>概要</Divider>
       <div style={{ textAlign: "left" }}>
@@ -36,7 +49,7 @@ function ProjectDetailCard(props: any) {
           sx={{ mb: 1.5, mt: 3 }}
           color="text.secondary"
         >
-          {post.description}
+          {isNoData ? <ProjectDetailSkeleton /> : post.description}
         </Typography>
         <Typography variant="body2" sx={{ mt: 2 }}>
           <div>
@@ -68,12 +81,12 @@ function ProjectDetailCard(props: any) {
       </div>
       <Divider sx={{ mt: 4 }}>詳細</Divider>
       <Typography sx={{ mt: 4 }} color="text.secondary">
-        {post.detail}
+        {isNoData ? <ProjectDetailSkeleton /> : post.detail}
       </Typography>
       <Divider sx={{ mt: 4 }}>リンク</Divider>
       <Typography sx={{ mb: 12, mt: 4 }} color="text.secondary">
         <Link href={post.url} target="_blank">
-          {post.url}
+          {isNoData ? <ProjectDetailSkeleton /> : post.url}
         </Link>
       </Typography>
     </Container>

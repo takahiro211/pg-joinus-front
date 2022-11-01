@@ -11,7 +11,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { appBarMenuBtn, menuItemLink } from "../../../utils/Styles";
-import { Labels } from "../../../utils/Consts";
+import { Labels, DrawerMenuLabels } from "../../../utils/Consts";
 import { Login } from "@mui/icons-material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PeopleIcon from "@mui/icons-material/People";
@@ -23,6 +23,13 @@ import { CookieSetOptions } from "universal-cookie";
 import { useCookies } from "react-cookie";
 import PersonIcon from "@mui/icons-material/Person";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import CodeIcon from "@mui/icons-material/Code";
+import PolicyIcon from "@mui/icons-material/Policy";
+import SupportIcon from "@mui/icons-material/Support";
+import GavelIcon from "@mui/icons-material/Gavel";
+import SmsIcon from "@mui/icons-material/Sms";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import PostAddIcon from "@mui/icons-material/PostAdd";
 
 type Anchor = "top" | "left" | "bottom" | "right";
 
@@ -90,10 +97,17 @@ export default function DrawerMenu(props: any) {
         {/** ログイン済みの場合 */}
         <div style={{ display: !isAuth ? "none" : "" }}>
           {[
-            Labels.MY_PAGE,
-            Labels.USERS_LIST,
-            Labels.LATEST_PROJECT_LIST,
-            Labels.LOGOUT,
+            DrawerMenuLabels.DRAWER_MENU_MYPAGE,
+            DrawerMenuLabels.DRAWER_MENU_PROJECTS,
+            DrawerMenuLabels.DRAWER_MENU_MANAGE_POSTS,
+            DrawerMenuLabels.DRAWER_MENU_FAVORITES,
+            DrawerMenuLabels.DRAWER_MENU_COMMENTS,
+            DrawerMenuLabels.DRAWER_MENU_FOLLOWER,
+            DrawerMenuLabels.DRAWER_MENU_HELP,
+            DrawerMenuLabels.DRAWER_MENU_TERMS,
+            DrawerMenuLabels.DRAWER_MENU_PRIVACY,
+            DrawerMenuLabels.DRAWER_MENU_DEVELOPER,
+            DrawerMenuLabels.DRAWER_MENU_LOGOUT,
           ].map((text) => getListItem(text))}
         </div>
         {/** 未ログイン時 */}
@@ -102,7 +116,9 @@ export default function DrawerMenu(props: any) {
         </div>
       </List>
       <Divider />
-      <List>{[Labels.CLOSE_MENU].map((text) => getListItem(text))}</List>
+      <List>
+        {[DrawerMenuLabels.DRAWER_MENU_CLOSE].map((text) => getListItem(text))}
+      </List>
     </Box>
   );
 
@@ -111,7 +127,7 @@ export default function DrawerMenu(props: any) {
    */
   const getListItem = (item: string) => (
     <Box>
-      {item === Labels.MY_PAGE && (
+      {item === DrawerMenuLabels.DRAWER_MENU_MYPAGE && (
         <Link to="mypage" style={menuItemLink}>
           <ListItem key={item} disablePadding>
             <ListItemButton>
@@ -123,7 +139,7 @@ export default function DrawerMenu(props: any) {
           </ListItem>
         </Link>
       )}
-      {item === Labels.USERS_LIST && (
+      {item === DrawerMenuLabels.DRAWER_MENU_FOLLOWER && (
         <Link to="users" style={menuItemLink}>
           <ListItem key={item} disablePadding>
             <ListItemButton>
@@ -135,7 +151,7 @@ export default function DrawerMenu(props: any) {
           </ListItem>
         </Link>
       )}
-      {item === Labels.LOGOUT && (
+      {item === DrawerMenuLabels.DRAWER_MENU_LOGOUT && (
         <ListItem key={item} disablePadding>
           <ListItemButton onClick={handleLogout}>
             <ListItemIcon>
@@ -145,7 +161,7 @@ export default function DrawerMenu(props: any) {
           </ListItemButton>
         </ListItem>
       )}
-      {item === Labels.SIGN_IN && (
+      {item === DrawerMenuLabels.DRAWER_MENU_LOGIN && (
         <Link to="sign-in" style={menuItemLink}>
           <ListItem key={item} disablePadding>
             <ListItemButton>
@@ -157,7 +173,7 @@ export default function DrawerMenu(props: any) {
           </ListItem>
         </Link>
       )}
-      {item === Labels.SIGN_UP && (
+      {item === DrawerMenuLabels.DRAWER_MENU_SIGNUP && (
         <Link to="sign-up" style={menuItemLink}>
           <ListItem key={item} disablePadding>
             <ListItemButton>
@@ -169,7 +185,7 @@ export default function DrawerMenu(props: any) {
           </ListItem>
         </Link>
       )}
-      {item === Labels.CLOSE_MENU && (
+      {item === DrawerMenuLabels.DRAWER_MENU_CLOSE && (
         <ListItem key={item} disablePadding>
           <ListItemButton onClick={toggleDrawer("right", false)}>
             <ListItemIcon>
@@ -179,12 +195,96 @@ export default function DrawerMenu(props: any) {
           </ListItemButton>
         </ListItem>
       )}
-      {item === Labels.LATEST_PROJECT_LIST && (
+      {item === DrawerMenuLabels.DRAWER_MENU_PROJECTS && (
         <Link to="projects" style={menuItemLink}>
           <ListItem key={item} disablePadding>
             <ListItemButton>
               <ListItemIcon>
                 <GitHubIcon />
+              </ListItemIcon>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+      )}
+      {item === DrawerMenuLabels.DRAWER_MENU_MANAGE_POSTS && (
+        <Link to="projects" style={menuItemLink}>
+          <ListItem key={item} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <PostAddIcon />
+              </ListItemIcon>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+      )}
+      {item === DrawerMenuLabels.DRAWER_MENU_FAVORITES && (
+        <Link to="projects" style={menuItemLink}>
+          <ListItem key={item} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <FavoriteIcon />
+              </ListItemIcon>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+      )}
+      {item === DrawerMenuLabels.DRAWER_MENU_COMMENTS && (
+        <Link to="projects" style={menuItemLink}>
+          <ListItem key={item} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <SmsIcon />
+              </ListItemIcon>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+      )}
+      {item === DrawerMenuLabels.DRAWER_MENU_HELP && (
+        <Link to="faq" style={menuItemLink}>
+          <ListItem key={item} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <SupportIcon />
+              </ListItemIcon>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+      )}
+      {item === DrawerMenuLabels.DRAWER_MENU_TERMS && (
+        <Link to="projects" style={menuItemLink}>
+          <ListItem key={item} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <GavelIcon />
+              </ListItemIcon>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+      )}
+      {item === DrawerMenuLabels.DRAWER_MENU_PRIVACY && (
+        <Link to="projects" style={menuItemLink}>
+          <ListItem key={item} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <PolicyIcon />
+              </ListItemIcon>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+      )}
+      {item === DrawerMenuLabels.DRAWER_MENU_DEVELOPER && (
+        <Link to="projects" style={menuItemLink}>
+          <ListItem key={item} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <CodeIcon />
               </ListItemIcon>
               <ListItemText primary={item} />
             </ListItemButton>
