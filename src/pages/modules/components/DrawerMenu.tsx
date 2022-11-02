@@ -103,6 +103,13 @@ export default function DrawerMenu(props: any) {
             DrawerMenuLabels.DRAWER_MENU_FAVORITES,
             DrawerMenuLabels.DRAWER_MENU_COMMENTS,
             DrawerMenuLabels.DRAWER_MENU_FOLLOWER,
+          ].map((text) => getListItem(text))}
+        </div>
+      </List>
+      <Divider />
+      <List>
+        <div style={{ display: !isAuth ? "none" : "" }}>
+          {[
             DrawerMenuLabels.DRAWER_MENU_HELP,
             DrawerMenuLabels.DRAWER_MENU_TERMS,
             DrawerMenuLabels.DRAWER_MENU_PRIVACY,
@@ -110,6 +117,8 @@ export default function DrawerMenu(props: any) {
             DrawerMenuLabels.DRAWER_MENU_LOGOUT,
           ].map((text) => getListItem(text))}
         </div>
+      </List>
+      <List>
         {/** 未ログイン時 */}
         <div style={{ display: isAuth ? "none" : "" }}>
           {[Labels.SIGN_IN, Labels.SIGN_UP].map((text) => getListItem(text))}

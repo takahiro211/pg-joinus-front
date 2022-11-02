@@ -80,7 +80,11 @@ function ProjectDetailCard(props: any) {
         </Typography>
       </div>
       <Divider sx={{ mt: 4 }}>詳細</Divider>
-      <Typography sx={{ mt: 4 }} color="text.secondary">
+      <Typography
+        component="p"
+        sx={{ mt: 4, whiteSpace: "pre-wrap" }}
+        color="text.secondary"
+      >
         {isNoData ? <ProjectDetailSkeleton /> : post.detail}
       </Typography>
       <Divider sx={{ mt: 4 }}>リンク</Divider>

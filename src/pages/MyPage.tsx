@@ -23,6 +23,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function MyPage() {
   const [posts, setPosts] = React.useState<PostsEntity[]>([]);
+  const [ads, setAds] = React.useState<PostsEntity[]>([]);
 
   React.useEffect(() => {
     userResponse();
@@ -30,11 +31,14 @@ function MyPage() {
 
   // API
   const userRepository = RepositoryFactory.get("guestPosts");
+  const adsRepository = RepositoryFactory.get("ads");
   console.log(userRepository);
   const userResponse = async () => {
     try {
-      const { data } = await userRepository.index();
-      setPosts(data);
+      const { data: pjdata } = await userRepository.index();
+      setPosts(pjdata);
+      const { data: adsdata } = await adsRepository.index();
+      setAds(adsdata);
     } catch (e) {
       console.log("プロジェクトの一覧を取得できませんでした。");
     }
@@ -67,7 +71,18 @@ function MyPage() {
                 }}
               >
                 <Typography sx={{ ml: 1, mt: 1 }}>おしらせ</Typography>
-                <Advertisement ad={""} />
+                {ads.length > 0 ? (
+                  ""
+                ) : (
+                  <>
+                    <MyPageSkeleton />
+                  </>
+                )}
+                {ads.map((ad) => (
+                  <>
+                    <Advertisement ad={ad} />
+                  </>
+                ))}
               </Box>
             </Grid>
             <Grid xs={12} md={9}>

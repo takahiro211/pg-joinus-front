@@ -13,20 +13,20 @@ function Advertisement(props: any) {
     <Card
       sx={{ minWidth: 10, mt: 2, mb: 2 }}
       style={{ marginRight: 1, marginLeft: 1 }}
+      elevation={0}
     >
-      <CardActionArea component={Link} to={props.ad.url}>
-        <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            {/* {DateFormat(props.ad.created_at)} */}
-          </Typography>
-          <Typography variant="h5" component="div">
-            {props.ad.title}
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            {props.ad.description}
-          </Typography>
-          <Typography variant="body2">
-            {/* {JSON.parse(props.ad.skill).map((skill: any) => (
+      <CardContent>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          {DateFormat(props.ad.created_at)}
+        </Typography>
+        <Typography variant="h5" component="div">
+          {props.ad.title}
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          {props.ad.content}
+        </Typography>
+        <Typography variant="body2">
+          {/* {JSON.parse(props.ad.skill).map((skill: any) => (
               <Chip
                 variant="outlined"
                 color="success"
@@ -35,7 +35,7 @@ function Advertisement(props: any) {
                 sx={{ mt: 0.5, mr: 0.4 }}
               />
             ))} */}
-            {/* {JSON.parse(props.ad.free_tag).map((tag: any) => (
+          {/* {JSON.parse(props.ad.free_tag).map((tag: any) => (
               <Chip
                 variant="outlined"
                 size="small"
@@ -43,9 +43,8 @@ function Advertisement(props: any) {
                 sx={{ mt: 0.5, mr: 0.4 }}
               />
             ))} */}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+        </Typography>
+      </CardContent>
     </Card>
   );
 }

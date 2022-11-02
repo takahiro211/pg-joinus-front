@@ -6,6 +6,7 @@ import UsersRepository from "./repositories/UsersRepository";
 import GuestPostsRepository from "./repositories/GuestPostsRepository";
 import ProjectsRepository from "./repositories/ProjectsRepository";
 import FaqRepository from "./repositories/FaqRepository";
+import AdsRepository from "./repositories/AdsRepository";
 
 interface repositoryObject {
   [name: string]: any;
@@ -20,6 +21,7 @@ const repositories: repositoryObject = {
   guestPosts: GuestPostsRepository,
   projects: ProjectsRepository,
   faq: FaqRepository,
+  ads: AdsRepository,
 };
 
 export const RepositoryFactory = {
