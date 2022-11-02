@@ -13,6 +13,10 @@ import CheckGuest from "./CheckGuest";
 import Projects from "../pages/Projects";
 import ProjectDetail from "../pages/ProjectDetail";
 import Faq from "../pages/Faq";
+import MyPosts from "../pages/MyPosts";
+import Developer from "../pages/Developer";
+import Post from "../pages/Post";
+import UserInformation from "../pages/UserInformation";
 
 function AllRoute() {
   const location = useLocation();
@@ -21,6 +25,7 @@ function AllRoute() {
       // --- BOTH ---
       <Route path="terms" element={<Terms />} />
       <Route path="privacy" element={<Privacy />} />
+      <Route path="developer" element={<Developer />} />
       <Route path="faq" element={<Faq />} />
       // --- Guest ---
       <Route
@@ -85,6 +90,30 @@ function AllRoute() {
         element={
           <CheckAuth>
             <ProjectDetail />
+          </CheckAuth>
+        }
+      />
+      <Route
+        path="my-posts"
+        element={
+          <CheckAuth>
+            <MyPosts />
+          </CheckAuth>
+        }
+      />
+      <Route
+        path="post"
+        element={
+          <CheckAuth>
+            <Post />
+          </CheckAuth>
+        }
+      />
+      <Route
+        path="user/:userId"
+        element={
+          <CheckAuth>
+            <UserInformation />
           </CheckAuth>
         }
       />

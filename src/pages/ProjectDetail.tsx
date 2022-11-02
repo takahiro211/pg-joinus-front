@@ -25,7 +25,6 @@ function ProjectDetail() {
   const userRepository = RepositoryFactory.get("projects");
   const userResponse = async () => {
     try {
-      console.log("postId", postId);
       const { data } = await userRepository.postDetail(postId);
       console.log("プロジェクト詳細", data);
       setPosts(data);

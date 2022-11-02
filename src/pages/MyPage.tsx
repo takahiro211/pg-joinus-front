@@ -12,33 +12,29 @@ import ProjectCard from "./modules/components/ProjectCard";
 import { Link } from "react-router-dom";
 import Advertisement from "./modules/components/Advertisement";
 import MyPageSkeleton from "./modules/skeleton/MyPageSkeleton";
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+import { UsersEntity } from "../api/entities/UsersEntity";
 
 function MyPage() {
   const [posts, setPosts] = React.useState<PostsEntity[]>([]);
   const [ads, setAds] = React.useState<PostsEntity[]>([]);
+  const [userInfo, setUser] = React.useState<UsersEntity>();
 
   React.useEffect(() => {
     userResponse();
   }, []);
 
   // API
-  const userRepository = RepositoryFactory.get("guestPosts");
+  const postsRepository = RepositoryFactory.get("guestPosts");
   const adsRepository = RepositoryFactory.get("ads");
-  console.log(userRepository);
+  const userRepository = RepositoryFactory.get("user");
   const userResponse = async () => {
     try {
-      const { data: pjdata } = await userRepository.index();
-      setPosts(pjdata);
-      const { data: adsdata } = await adsRepository.index();
-      setAds(adsdata);
+      const { data: pjData } = await postsRepository.index();
+      setPosts(pjData);
+      const { data: adsData } = await adsRepository.index();
+      setAds(adsData);
+      const { data: userData } = await userRepository.index();
+      setUser(userData);
     } catch (e) {
       console.log("プロジェクトの一覧を取得できませんでした。");
     }
@@ -47,16 +43,16 @@ function MyPage() {
   return (
     <React.Fragment>
       <Box sx={{ mt: 7, mb: 12 }}>
-        {/* <Typography variant="h3" gutterBottom marked="center" align="center">
-            {Labels.MY_PAGE}
-          </Typography>
-          こんにちは。logged in. */}
         <Container
           sx={{
             mb: 2,
           }}
         >
-          {Labels.MY_PAGE}さん、こんにちは。
+          {userInfo == null || userInfo == undefined ? (
+            <Box sx={{ mt: 12 }} />
+          ) : (
+            <>{userInfo.name}さん、こんにちは。</>
+          )}
         </Container>
         <Container>
           <Grid container>

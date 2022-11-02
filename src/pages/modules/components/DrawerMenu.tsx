@@ -10,7 +10,11 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { appBarMenuBtn, menuItemLink } from "../../../utils/Styles";
+import {
+  appBarMenuBtn,
+  hideUnderline,
+  menuItemLink,
+} from "../../../utils/Styles";
 import { Labels, DrawerMenuLabels } from "../../../utils/Consts";
 import { Login } from "@mui/icons-material";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -30,6 +34,8 @@ import GavelIcon from "@mui/icons-material/Gavel";
 import SmsIcon from "@mui/icons-material/Sms";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PostAddIcon from "@mui/icons-material/PostAdd";
+import { Hidden } from "@mui/material";
+import Typography from "./Typography";
 
 type Anchor = "top" | "left" | "bottom" | "right";
 
@@ -217,7 +223,7 @@ export default function DrawerMenu(props: any) {
         </Link>
       )}
       {item === DrawerMenuLabels.DRAWER_MENU_MANAGE_POSTS && (
-        <Link to="projects" style={menuItemLink}>
+        <Link to="/my-posts" style={menuItemLink}>
           <ListItem key={item} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -265,7 +271,7 @@ export default function DrawerMenu(props: any) {
         </Link>
       )}
       {item === DrawerMenuLabels.DRAWER_MENU_TERMS && (
-        <Link to="projects" style={menuItemLink}>
+        <Link to="/terms" style={menuItemLink}>
           <ListItem key={item} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -277,7 +283,7 @@ export default function DrawerMenu(props: any) {
         </Link>
       )}
       {item === DrawerMenuLabels.DRAWER_MENU_PRIVACY && (
-        <Link to="projects" style={menuItemLink}>
+        <Link to="/privacy" style={menuItemLink}>
           <ListItem key={item} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -289,7 +295,7 @@ export default function DrawerMenu(props: any) {
         </Link>
       )}
       {item === DrawerMenuLabels.DRAWER_MENU_DEVELOPER && (
-        <Link to="projects" style={menuItemLink}>
+        <Link to="/developer" style={menuItemLink}>
           <ListItem key={item} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -307,6 +313,16 @@ export default function DrawerMenu(props: any) {
     <div>
       {(["right"] as const).map((anchor) => (
         <React.Fragment key={anchor}>
+          <Hidden mdDown>
+            <Link to="/post" style={appBarMenuBtn}>
+              <Button style={appBarMenuBtn} sx={{ mr: 1 }}>
+                <PostAddIcon />
+                <Typography sx={{ ml: 0.5, fontWeight: "bold", fontSize: 14 }}>
+                  投稿する
+                </Typography>
+              </Button>
+            </Link>
+          </Hidden>
           <Button onClick={toggleDrawer(anchor, true)} style={appBarMenuBtn}>
             <MenuIcon />
           </Button>
