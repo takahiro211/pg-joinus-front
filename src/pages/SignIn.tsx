@@ -11,9 +11,11 @@ import FormFeedback from "./modules/form/FormFeedback";
 import withRoot from "../withRoot";
 import { FormItems, Labels } from "../utils/Consts";
 import { RepositoryFactory } from "../api/RepositoryFactory";
-import { Alert, Button, Collapse, IconButton } from "@mui/material";
+import { Alert, Collapse, IconButton } from "@mui/material";
+
 import CloseIcon from "@mui/icons-material/Close";
 import { useAuth } from "../utils/AuthContext";
+import Button from "./modules/components/Button";
 
 function SignIn() {
   const [sent, setSent] = React.useState(false);
@@ -150,8 +152,11 @@ function SignIn() {
                   ) : null
                 }
               </FormSpy>
-              <Typography align="center" sx={{ mt: 1 }}>
+              <Typography align="center" sx={{ mt: 2 }}>
                 <Button
+                  size="small"
+                  color="primary"
+                  variant="contained"
                   disabled={submitting || sent}
                   onClick={(e: any) => {
                     handleTestBtn();

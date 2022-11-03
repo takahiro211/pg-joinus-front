@@ -53,6 +53,8 @@ export const Labels = {
   MY_PAGE: "マイページ",
   SKILLS: "スキル",
   FREE_TAGS: "タグ",
+  CREATED_AT: "投稿日",
+  UPDATED_AT: "更新日",
 };
 
 export const ProductIntro = {

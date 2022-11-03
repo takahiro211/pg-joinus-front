@@ -6,6 +6,7 @@ import {
   Chip,
   Divider,
   Link,
+  Stack,
   Typography,
 } from "@mui/material";
 import { Container } from "@mui/system";
@@ -15,32 +16,100 @@ import TerminalIcon from "@mui/icons-material/Terminal";
 import SpeakerNotesIcon from "@mui/icons-material/SpeakerNotes";
 import ComponentTypography from "./Typography";
 import ProjectDetailSkeleton from "../skeleton/ProjectDetailSkeleton";
+import Button from "./Button";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { RepositoryFactory } from "../../../api/RepositoryFactory";
+import { useEffect, useState } from "react";
 
-function ProjectDetailCard(props: any) {
+function ProjectDetailContent(props: any) {
   const isNoData = props.post <= 0;
-  const post = isNoData ? "" : props.post[0];
+  const post = isNoData ? "" : props.post[0][0];
   const skills = post.skill;
-  const free_tags = post.free_tag;
+  const freeTags = post.free_tag;
+  const isAuthor = isNoData ? false : props.post[1].is_author;
+  const [stateIsFavorite, setIsFavorite] = useState(true);
+
+  useEffect(() => {
+    setIsFavorite(isNoData ? false : props.post[2].is_favorite);
+    console.log("stateIsFavorite", stateIsFavorite);
+  }, [isNoData ? false : props.post[2].is_favorite]);
+
+  const handleFavoriteRemove = () => {
+    favoriteRemoveResponse();
+  };
+
+  const handleFavorite = () => {
+    favoriteResponse();
+  };
+
+  // API お気に入り登録処理
+  const favoriteRepository = RepositoryFactory.get("favorite");
+  const favoriteResponse = async () => {
+    try {
+      const favoriteResponse = await favoriteRepository.favorite(post.id);
+      setIsFavorite(true);
+    } catch (e) {}
+  };
+
+  // API お気に入り解除処理
+  const favoriteRemoveRepository = RepositoryFactory.get("favoriteRemove");
+  const favoriteRemoveResponse = async () => {
+    try {
+      const favoriteResponse = await favoriteRemoveRepository.favorite(post.id);
+      setIsFavorite(false);
+    } catch (e) {}
+  };
 
   return (
     <Container maxWidth="md" sx={{ mt: 7 }}>
-      <Box sx={{ mt: 7, mb: 0 }}>
-        <ComponentTypography
-          variant="h3"
-          gutterBottom
-          marked="center"
-          align="center"
-        >
+      <Typography sx={{ mt: 6, mb: 1 }} color="text.secondary" gutterBottom>
+        {isNoData ? "" : Labels.CREATED_AT + " " + DateFormat(post.created_at)}
+      </Typography>
+      <Box sx={{ mt: 0, mb: 1 }}>
+        <ComponentTypography variant="h3">
           {isNoData ? <ProjectDetailSkeleton /> : post.title}
         </ComponentTypography>
       </Box>
-      <Typography
-        sx={{ fontSize: 16, mt: 6, mb: 1, textAlign: "right" }}
-        color="text.secondary"
-        gutterBottom
-      >
-        {isNoData ? "" : DateFormat(post.created_at)}
-      </Typography>
+      {isNoData ? (
+        ""
+      ) : (
+        <Stack direction="row" justifyContent="flex-end">
+          <Box sx={{ mt: 0, mb: 2 }}>
+            {isAuthor ? (
+              <Button
+                size="small"
+                color="primary"
+                variant="contained"
+                sx={{ mr: 2 }}
+              >
+                編集する
+              </Button>
+            ) : (
+              ""
+            )}
+            {stateIsFavorite ? (
+              <Button
+                size="small"
+                color="primary"
+                variant="contained"
+                onClick={handleFavoriteRemove}
+              >
+                お気に入り解除
+              </Button>
+            ) : (
+              <Button
+                size="small"
+                color="secondary"
+                variant="contained"
+                onClick={handleFavorite}
+              >
+                <FavoriteIcon sx={{ mr: 1 }} />
+                お気に入り登録
+              </Button>
+            )}
+          </Box>
+        </Stack>
+      )}
       <Divider>概要</Divider>
       <div style={{ textAlign: "left" }}>
         <Typography
@@ -66,8 +135,8 @@ function ProjectDetailCard(props: any) {
               : ""}
           </div>
           <div>
-            {free_tags
-              ? JSON.parse(free_tags).map((tag: any) => (
+            {freeTags
+              ? JSON.parse(freeTags).map((tag: any) => (
                   <Chip
                     variant="outlined"
                     size="small"
@@ -97,4 +166,4 @@ function ProjectDetailCard(props: any) {
   );
 }
 
-export default ProjectDetailCard;
+export default ProjectDetailContent;

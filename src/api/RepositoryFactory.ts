@@ -7,6 +7,8 @@ import GuestPostsRepository from "./repositories/GuestPostsRepository";
 import ProjectsRepository from "./repositories/ProjectsRepository";
 import FaqRepository from "./repositories/FaqRepository";
 import AdsRepository from "./repositories/AdsRepository";
+import FavoriteRepository from "./repositories/FavoriteRepository";
+import FavoriteRemoveRepository from "./repositories/FavoriteRemoveRepository";
 
 interface repositoryObject {
   [name: string]: any;
@@ -22,6 +24,8 @@ const repositories: repositoryObject = {
   projects: ProjectsRepository,
   faq: FaqRepository,
   ads: AdsRepository,
+  favorite: FavoriteRepository,
+  favoriteRemove: FavoriteRemoveRepository,
 };
 
 export const RepositoryFactory = {
