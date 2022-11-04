@@ -50,10 +50,8 @@ export default (resource: string) => {
     },
     // プロジェクトのお気に入り登録・解除
     favorite(postId: string) {
-      return apiRepository.get(resource, {
-        params: {
-          postId: postId,
-        },
+      return apiRepository.post(resource, {
+        postId: postId,
       });
     },
   };

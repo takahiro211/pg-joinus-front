@@ -5,29 +5,25 @@ import withRoot from "../withRoot";
 import ProductCategories from "./modules/views/ProductCategories";
 import ProductSmokingHero from "./modules/views/ProductSmokingHero";
 import { Pagination, Paper, Typography } from "@mui/material";
-import Button from "./modules/components/Button";
 import { PostsEntity } from "../api/entities/PostsEntity";
 import { RepositoryFactory } from "../api/RepositoryFactory";
 import ProjectCard from "./modules/components/ProjectCard";
-import { Link } from "react-router-dom";
 import MyPageSkeleton from "./modules/skeleton/MyPageSkeleton";
-import { hideUnderline } from "../utils/Styles";
-import PostAddIcon from "@mui/icons-material/PostAdd";
 import Stack from "@mui/material/Stack";
 
-function MyPosts() {
-  const [posts, setPosts] = React.useState<PostsEntity[]>([]);
+function FavoriteProjects() {
+  const [favorites, setFavorites] = React.useState<PostsEntity[]>([]);
 
   React.useEffect(() => {
-    postsResponse();
+    favoritesResponse();
   }, []);
 
   // API
-  const postsRepository = RepositoryFactory.get("guestPosts");
-  const postsResponse = async () => {
+  const favoritesRepository = RepositoryFactory.get("favoriteList");
+  const favoritesResponse = async () => {
     try {
-      const { data: pjData } = await postsRepository.index();
-      setPosts(pjData);
+      const { data: favData } = await favoritesRepository.index();
+      setFavorites(favData);
     } catch (e) {
       console.log("プロジェクトの一覧を取得できませんでした。");
     }
@@ -37,19 +33,6 @@ function MyPosts() {
     <React.Fragment>
       <Box sx={{ mt: 7, mb: 12 }}>
         <Container>
-          <Box textAlign="center">
-            <Link to="/post" style={hideUnderline}>
-              <Button
-                sx={{ mt: 3, mb: 2 }}
-                size="large"
-                color="secondary"
-                variant="contained"
-              >
-                <PostAddIcon sx={{ mr: 2 }} />
-                投稿する
-              </Button>
-            </Link>
-          </Box>
           <Box
             component={Paper}
             elevation={0}
@@ -59,8 +42,8 @@ function MyPosts() {
               backgroundColor: "#FCFCFC",
             }}
           >
-            <Typography sx={{ ml: 1, mt: 1 }}>あなたの投稿一覧</Typography>
-            {posts.length > 0 ? (
+            <Typography sx={{ ml: 1, mt: 1 }}>お気に入りの投稿一覧</Typography>
+            {favorites.length > 0 ? (
               ""
             ) : (
               <>
@@ -71,9 +54,9 @@ function MyPosts() {
                 <MyPageSkeleton />
               </>
             )}
-            {posts.map((post) => (
+            {favorites.map((fav) => (
               <>
-                <ProjectCard post={post} />
+                <ProjectCard post={fav} />
               </>
             ))}
             <Box
@@ -100,4 +83,4 @@ function MyPosts() {
   );
 }
 
-export default withRoot(MyPosts);
+export default withRoot(FavoriteProjects);

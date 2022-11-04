@@ -17,6 +17,7 @@ import MyPosts from "../pages/MyPosts";
 import Developer from "../pages/Developer";
 import Post from "../pages/Post";
 import UserInformation from "../pages/UserInformation";
+import FavoriteProjects from "../pages/FavoriteProjects";
 
 function AllRoute() {
   const location = useLocation();
@@ -98,6 +99,14 @@ function AllRoute() {
         element={
           <CheckAuth>
             <MyPosts />
+          </CheckAuth>
+        }
+      />
+      <Route
+        path="favorites"
+        element={
+          <CheckAuth>
+            <FavoriteProjects />
           </CheckAuth>
         }
       />

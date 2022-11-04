@@ -235,7 +235,7 @@ export default function DrawerMenu(props: any) {
         </Link>
       )}
       {item === DrawerMenuLabels.DRAWER_MENU_FAVORITES && (
-        <Link to="projects" style={menuItemLink}>
+        <Link to="favorites" style={menuItemLink}>
           <ListItem key={item} disablePadding>
             <ListItemButton>
               <ListItemIcon>
