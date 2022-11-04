@@ -10,6 +10,7 @@ import AdsRepository from "./repositories/AdsRepository";
 import FavoriteRepository from "./repositories/FavoriteRepository";
 import FavoriteRemoveRepository from "./repositories/FavoriteRemoveRepository";
 import FavoriteListRepository from "./repositories/FavoriteListRepository";
+import NameEditRepository from "./repositories/NameEditRepository";
 
 interface repositoryObject {
   [name: string]: any;
@@ -28,6 +29,7 @@ const repositories: repositoryObject = {
   favorite: FavoriteRepository,
   favoriteRemove: FavoriteRemoveRepository,
   favoriteList: FavoriteListRepository,
+  nameEdit: NameEditRepository,
 };
 
 export const RepositoryFactory = {

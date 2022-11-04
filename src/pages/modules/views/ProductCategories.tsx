@@ -37,7 +37,6 @@ export default function ProductCategories() {
 
   // API
   const userRepository = RepositoryFactory.get("guestPosts");
-  console.log(userRepository);
   const userResponse = async () => {
     try {
       const { data } = await userRepository.index();

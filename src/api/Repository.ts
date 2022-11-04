@@ -54,5 +54,10 @@ export default (resource: string) => {
         postId: postId,
       });
     },
+    update(name: string) {
+      return apiRepository.post(resource, {
+        name: name,
+      });
+    },
   };
 };

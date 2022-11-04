@@ -4,7 +4,16 @@ import Box from "@mui/material/Box";
 import withRoot from "../withRoot";
 import ProductCategories from "./modules/views/ProductCategories";
 import ProductSmokingHero from "./modules/views/ProductSmokingHero";
-import { Grid, Paper, Typography } from "@mui/material";
+import {
+  Alert,
+  Grid,
+  Hidden,
+  Paper,
+  Snackbar,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { PostsEntity } from "../api/entities/PostsEntity";
 import { RepositoryFactory } from "../api/RepositoryFactory";
 import ProjectCard from "./modules/components/ProjectCard";
@@ -12,15 +21,56 @@ import { Link } from "react-router-dom";
 import Advertisement from "./modules/components/Advertisement";
 import MyPageSkeleton from "./modules/skeleton/MyPageSkeleton";
 import { UsersEntity } from "../api/entities/UsersEntity";
+import Button from "./modules/components/Button";
+import { Field, Form } from "react-final-form";
+import FormButton from "./modules/form/FormButton";
+import RFTextField from "./modules/form/RFTextField";
 
 function MyPage() {
   const [posts, setPosts] = React.useState<PostsEntity[]>([]);
   const [ads, setAds] = React.useState<PostsEntity[]>([]);
   const [userInfo, setUser] = React.useState<UsersEntity>();
+  const [editMode, setEditMode] = React.useState(false);
+  const [userName, setUserName] = React.useState("");
+  const [snackBarOpen, setSnackBarOpen] = React.useState(false);
 
   React.useEffect(() => {
     userResponse();
   }, []);
+
+  // ユーザー名変更
+  const nameEditRepository = RepositoryFactory.get("nameEdit");
+  const handleEdit = () => {
+    setEditMode(true);
+  };
+  const handleSave = (values: { "": string }) => {
+    const value = Object.entries(values).map((x) => x);
+    nameEdit(value[0][1]);
+  };
+  const handleCancel = () => {
+    setEditMode(false);
+  };
+  const nameEdit = async (name: string) => {
+    try {
+      await nameEditRepository.update(name);
+      setUserName(name);
+      setEditMode(false);
+      setSnackBarOpen(true);
+    } catch (e) {
+      console.log("更新に失敗しました。");
+    }
+  };
+
+  // スナックバーを閉じる
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackBarOpen(false);
+  };
 
   // API
   const postsRepository = RepositoryFactory.get("guestPosts");
@@ -42,17 +92,6 @@ function MyPage() {
   return (
     <React.Fragment>
       <Box sx={{ mt: 7, mb: 12 }}>
-        <Container
-          sx={{
-            mb: 2,
-          }}
-        >
-          {userInfo == null || userInfo == undefined ? (
-            <Box sx={{ mt: 12 }} />
-          ) : (
-            <>{userInfo.name}さん、こんにちは。</>
-          )}
-        </Container>
         <Container>
           <Grid container>
             <Grid xs={12} md={3}>
@@ -62,23 +101,118 @@ function MyPage() {
                 sx={{
                   p: 1,
                   m: 1,
+                  pl: 2,
+                  pt: 2,
+                  mb: 2,
                   backgroundColor: "#FCFCFC",
                 }}
               >
-                <Typography sx={{ ml: 1, mt: 1 }}>おしらせ</Typography>
-                {ads.length > 0 ? (
-                  ""
-                ) : (
+                {userInfo == null || userInfo == undefined ? (
                   <>
                     <MyPageSkeleton />
                   </>
-                )}
-                {ads.map((ad) => (
+                ) : (
                   <>
-                    <Advertisement ad={ad} />
+                    <Typography sx={{ fontWeight: "bold" }}>
+                      ログイン中
+                    </Typography>
+                    <Box sx={{ p: 1 }}>
+                      <Typography color="primary.light">
+                        <Typography component="span" sx={{ mr: 1 }}>
+                          ID
+                        </Typography>
+                        {userInfo.id}
+                      </Typography>
+                      {editMode ? (
+                        <Form
+                          onSubmit={handleSave}
+                          // subscription={{ submitting: true }}
+                        >
+                          {({ handleSubmit: handleSubmit2, submitting }) => (
+                            <Box
+                              component="form"
+                              onSubmit={handleSubmit2}
+                              noValidate
+                            >
+                              <Field
+                                component={RFTextField}
+                                fullWidth
+                                margin="normal"
+                                name="name"
+                                required
+                                size="small"
+                                defaultValue={
+                                  userName == "" ? userInfo.name : userName
+                                }
+                                sx={{ mt: 1, mb: 1 }}
+                              />
+                              <Stack direction="row" justifyContent="flex-end">
+                                <Button
+                                  onClick={handleCancel}
+                                  size="small"
+                                  color="primary"
+                                  variant="contained"
+                                  sx={{ mr: 1 }}
+                                >
+                                  キャンセル
+                                </Button>
+                                <FormButton
+                                  size="small"
+                                  color="secondary"
+                                  variant="contained"
+                                >
+                                  保存
+                                </FormButton>
+                              </Stack>
+                            </Box>
+                          )}
+                        </Form>
+                      ) : (
+                        <>
+                          <Typography color="primary.light">
+                            {userName == "" ? userInfo.name : userName}
+                          </Typography>
+                          <Stack direction="row" justifyContent="flex-end">
+                            <Button
+                              onClick={handleEdit}
+                              size="small"
+                              color="secondary"
+                              variant="contained"
+                            >
+                              編集
+                            </Button>
+                          </Stack>
+                        </>
+                      )}
+                    </Box>
                   </>
-                ))}
+                )}
               </Box>
+              <Hidden mdDown>
+                <Box
+                  component={Paper}
+                  elevation={0}
+                  sx={{
+                    p: 1,
+                    m: 1,
+                    backgroundColor: "#FCFCFC",
+                  }}
+                >
+                  <Typography sx={{ ml: 1, mt: 1 }}>おしらせ</Typography>
+                  {ads.length > 0 ? (
+                    ""
+                  ) : (
+                    <>
+                      <MyPageSkeleton />
+                    </>
+                  )}
+                  {ads.map((ad) => (
+                    <>
+                      <Advertisement ad={ad} />
+                    </>
+                  ))}
+                </Box>
+              </Hidden>
             </Grid>
             <Grid xs={12} md={9}>
               <Box
@@ -125,6 +259,16 @@ function MyPage() {
       </Box>
       <ProductCategories />
       <ProductSmokingHero />
+      <Snackbar
+        open={snackBarOpen}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert onClose={handleClose} severity="info" sx={{ width: "100%" }}>
+          名前を変更しました
+        </Alert>
+      </Snackbar>
     </React.Fragment>
   );
 }
