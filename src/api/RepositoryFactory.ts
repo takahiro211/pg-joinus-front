@@ -11,6 +11,8 @@ import FavoriteRepository from "./repositories/FavoriteRepository";
 import FavoriteRemoveRepository from "./repositories/FavoriteRemoveRepository";
 import FavoriteListRepository from "./repositories/FavoriteListRepository";
 import NameEditRepository from "./repositories/NameEditRepository";
+import TagMasterRepository from "./repositories/TagMasterRepository";
+import PostRepository from "./repositories/PostRepository";
 
 interface repositoryObject {
   [name: string]: any;
@@ -30,6 +32,8 @@ const repositories: repositoryObject = {
   favoriteRemove: FavoriteRemoveRepository,
   favoriteList: FavoriteListRepository,
   nameEdit: NameEditRepository,
+  tagMaster: TagMasterRepository,
+  post: PostRepository,
 };
 
 export const RepositoryFactory = {

@@ -6,7 +6,7 @@ import {
   Container,
 } from "@mui/material";
 import * as React from "react";
-import { FaqListEntity } from "../api/entities/FaqListEntity";
+import { FaqListEntity } from "../api/entities/response/FaqListEntity";
 import { RepositoryFactory } from "../api/RepositoryFactory";
 import { Labels } from "../utils/Consts";
 import withRoot from "../withRoot";

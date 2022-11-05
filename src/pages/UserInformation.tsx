@@ -14,7 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import Button from "./modules/components/Button";
-import { PostsEntity } from "../api/entities/PostsEntity";
+import { PostsEntity } from "../api/entities/response/PostsEntity";
 import { RepositoryFactory } from "../api/RepositoryFactory";
 import ProjectCard from "./modules/components/ProjectCard";
 import { Link } from "react-router-dom";
@@ -25,7 +25,7 @@ import PostAddIcon from "@mui/icons-material/PostAdd";
 import Stack from "@mui/material/Stack";
 import ComponentsTypography from "./modules/components/Typography";
 import GradeIcon from "@mui/icons-material/Grade";
-import { UsersEntity } from "../api/entities/UsersEntity";
+import { UsersEntity } from "../api/entities/response/UsersEntity";
 import { useParams } from "react-router-dom";
 
 function UserInformation() {

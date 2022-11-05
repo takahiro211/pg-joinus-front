@@ -7,7 +7,7 @@ import withRoot from "../withRoot";
 import { RepositoryFactory } from "../api/RepositoryFactory";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/AuthContext";
-import { UsersEntity } from "../api/entities/UsersEntity";
+import { UsersEntity } from "../api/entities/response/UsersEntity";
 import {
   Paper,
   Table,

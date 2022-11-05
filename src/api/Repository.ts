@@ -1,6 +1,7 @@
 import axios from "axios";
-import { ProjectDetailEntity } from "./entities/ProjectDetailEntity";
-import { UsersEntity } from "./entities/UsersEntity";
+import { CreatePostEntity } from "./entities/request/CreatePostEntity";
+import { ProjectDetailEntity } from "./entities/response/ProjectDetailEntity";
+import { UsersEntity } from "./entities/response/UsersEntity";
 
 // fqdn
 const fqdn: string | undefined = process.env.REACT_APP_API_FQDN;
@@ -58,6 +59,9 @@ export default (resource: string) => {
       return apiRepository.post(resource, {
         name: name,
       });
+    },
+    postProject(postData: CreatePostEntity) {
+      return apiRepository.post(resource, { postData });
     },
   };
 };

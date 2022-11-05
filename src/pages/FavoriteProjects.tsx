@@ -5,7 +5,7 @@ import withRoot from "../withRoot";
 import ProductCategories from "./modules/views/ProductCategories";
 import ProductSmokingHero from "./modules/views/ProductSmokingHero";
 import { Pagination, Paper, Typography } from "@mui/material";
-import { PostsEntity } from "../api/entities/PostsEntity";
+import { PostsEntity } from "../api/entities/response/PostsEntity";
 import { RepositoryFactory } from "../api/RepositoryFactory";
 import ProjectCard from "./modules/components/ProjectCard";
 import MyPageSkeleton from "./modules/skeleton/MyPageSkeleton";

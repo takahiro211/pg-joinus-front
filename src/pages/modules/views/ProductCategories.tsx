@@ -20,7 +20,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { DateFormat } from "../../../utils/Util";
-import { PostsEntity } from "../../../api/entities/PostsEntity";
+import { PostsEntity } from "../../../api/entities/response/PostsEntity";
 import { useEffect, useState } from "react";
 import { RepositoryFactory } from "../../../api/RepositoryFactory";
 import Slider from "react-slick";

@@ -6,21 +6,21 @@ import ProductCategories from "./modules/views/ProductCategories";
 import ProductSmokingHero from "./modules/views/ProductSmokingHero";
 import {
   Alert,
+  Chip,
   Grid,
   Hidden,
   Paper,
   Snackbar,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
-import { PostsEntity } from "../api/entities/PostsEntity";
+import { PostsEntity } from "../api/entities/response/PostsEntity";
 import { RepositoryFactory } from "../api/RepositoryFactory";
 import ProjectCard from "./modules/components/ProjectCard";
 import { Link } from "react-router-dom";
 import Advertisement from "./modules/components/Advertisement";
 import MyPageSkeleton from "./modules/skeleton/MyPageSkeleton";
-import { UsersEntity } from "../api/entities/UsersEntity";
+import { UsersEntity } from "../api/entities/response/UsersEntity";
 import Button from "./modules/components/Button";
 import { Field, Form } from "react-final-form";
 import FormButton from "./modules/form/FormButton";
@@ -33,6 +33,7 @@ function MyPage() {
   const [editMode, setEditMode] = React.useState(false);
   const [userName, setUserName] = React.useState("");
   const [snackBarOpen, setSnackBarOpen] = React.useState(false);
+  const [sent, setSent] = React.useState(false);
 
   React.useEffect(() => {
     userResponse();
@@ -45,19 +46,30 @@ function MyPage() {
   };
   const handleSave = (values: { "": string }) => {
     const value = Object.entries(values).map((x) => x);
-    nameEdit(value[0][1]);
+    const inputValue = value[0][1];
+    let defaultValue = "";
+    if (userInfo != null || userInfo != undefined) {
+      defaultValue = userName == "" ? userInfo.name : userName;
+    }
+    // 値が変更されていない場合は更新処理をしない
+    if (inputValue != defaultValue) {
+      nameEdit(inputValue);
+    }
   };
   const handleCancel = () => {
     setEditMode(false);
   };
   const nameEdit = async (name: string) => {
+    setSent(true);
     try {
       await nameEditRepository.update(name);
       setUserName(name);
       setEditMode(false);
       setSnackBarOpen(true);
+      setSent(false);
     } catch (e) {
       console.log("更新に失敗しました。");
+      setSent(false);
     }
   };
 
@@ -117,16 +129,15 @@ function MyPage() {
                       ログイン中
                     </Typography>
                     <Box sx={{ p: 1 }}>
-                      <Typography color="primary.light">
-                        <Typography component="span" sx={{ mr: 1 }}>
-                          ID
-                        </Typography>
-                        {userInfo.id}
-                      </Typography>
+                      <Chip
+                        label={"ID " + userInfo.id}
+                        size="small"
+                        sx={{ mb: 1 }}
+                      />
                       {editMode ? (
                         <Form
                           onSubmit={handleSave}
-                          // subscription={{ submitting: true }}
+                          subscription={{ submitting: true }}
                         >
                           {({ handleSubmit: handleSubmit2, submitting }) => (
                             <Box
@@ -145,6 +156,7 @@ function MyPage() {
                                   userName == "" ? userInfo.name : userName
                                 }
                                 sx={{ mt: 1, mb: 1 }}
+                                disabled={submitting || sent}
                               />
                               <Stack direction="row" justifyContent="flex-end">
                                 <Button
@@ -153,6 +165,7 @@ function MyPage() {
                                   color="primary"
                                   variant="contained"
                                   sx={{ mr: 1 }}
+                                  disabled={submitting || sent}
                                 >
                                   キャンセル
                                 </Button>
@@ -160,6 +173,7 @@ function MyPage() {
                                   size="small"
                                   color="secondary"
                                   variant="contained"
+                                  disabled={submitting || sent}
                                 >
                                   保存
                                 </FormButton>

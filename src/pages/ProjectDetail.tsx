@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import * as React from "react";
-import { PostsEntity } from "../api/entities/PostsEntity";
-import { UsersEntity } from "../api/entities/UsersEntity";
+import { PostsEntity } from "../api/entities/response/PostsEntity";
+import { UsersEntity } from "../api/entities/response/UsersEntity";
 import { RepositoryFactory } from "../api/RepositoryFactory";
 import { Labels } from "../utils/Consts";
 import withRoot from "../withRoot";
