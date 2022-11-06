@@ -23,7 +23,7 @@ function MyPosts() {
   }, []);
 
   // API
-  const postsRepository = RepositoryFactory.get("guestPosts");
+  const postsRepository = RepositoryFactory.get("myPosts");
   const postsResponse = async () => {
     try {
       const { data: pjData } = await postsRepository.index();

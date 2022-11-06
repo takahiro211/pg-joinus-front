@@ -4,8 +4,8 @@ export const AppStrings = {
 
 export const DrawerMenuLabels = {
   DRAWER_MENU_MYPAGE: "マイページ",
-  DRAWER_MENU_PROJECTS: "プロジェクト検索",
-  DRAWER_MENU_MANAGE_POSTS: "プロジェクト投稿の管理",
+  DRAWER_MENU_PROJECTS: "新着プロジェクト",
+  DRAWER_MENU_MANAGE_POSTS: "投稿の管理",
   DRAWER_MENU_FAVORITES: "お気に入り",
   DRAWER_MENU_COMMENTS: "コメント管理",
   DRAWER_MENU_FOLLOWER: "フォロー・フォロワー",
@@ -24,7 +24,7 @@ export const Labels = {
   SUBJECT: "スキルに応じたGitHubリポジトリをご紹介",
   SIGN_UP: "新規会員登録",
   SIGN_UP_DESCRIPTION: "無料の会員登録はこちらから",
-  LATEST_PROJECT_LIST: "新着プロジェクト一覧",
+  LATEST_PROJECT_LIST: "新着プロジェクト",
   FLOW_OF_JOIN: "参加の流れ",
   FAQ_CONTACT: "よくあるご質問・お問い合わせ",
   FAQ_CONTACT_DESCRIPTION: "お困りの際はこちらをご確認ください。",

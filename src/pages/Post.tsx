@@ -19,7 +19,6 @@ import {
   tooltipClasses,
   Typography,
 } from "@mui/material";
-import { PostsEntity } from "../api/entities/response/PostsEntity";
 import { RepositoryFactory } from "../api/RepositoryFactory";
 import { useNavigate } from "react-router-dom";
 import PostAddIcon from "@mui/icons-material/PostAdd";
@@ -56,7 +55,7 @@ function Post() {
       const { data: tagMaster } = await tagMasterRepository.index();
       setTags(tagMaster);
     } catch (e) {
-      console.log("プロジェクトの一覧を取得できませんでした。");
+      console.log("タグを取得できませんでした。");
     }
   };
 

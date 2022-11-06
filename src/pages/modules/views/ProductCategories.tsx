@@ -1,25 +1,7 @@
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
 import Container from "@mui/material/Container";
 import Typography from "../components/Typography";
 import { Labels } from "../../../utils/Consts";
-import {
-  Button,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  Chip,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
-import { DateFormat } from "../../../utils/Util";
 import { PostsEntity } from "../../../api/entities/response/PostsEntity";
 import { useEffect, useState } from "react";
 import { RepositoryFactory } from "../../../api/RepositoryFactory";
