@@ -92,4 +92,5 @@ export const FormItems = {
 
 export const ErrorMessages = {
   VALIDATION_ERROR_REQUIRED_ITEM: "入力必須項目です。",
+  VALIDATION_ERROR_EMAIL: "メールアドレスの形式ではありません。",
 };

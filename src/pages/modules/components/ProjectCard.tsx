@@ -26,23 +26,25 @@ function ProjectCard(props: any) {
             {props.post.description}
           </Typography>
           <Typography variant="body2">
-            {JSON.parse(props.post.skill).map((skill: any) => (
-              <Chip
-                variant="outlined"
-                color="success"
-                size="small"
-                label={skill}
-                sx={{ mt: 0.5, mr: 0.4 }}
-              />
-            ))}
-            {JSON.parse(props.post.free_tag).map((tag: any) => (
-              <Chip
-                variant="outlined"
-                size="small"
-                label={tag}
-                sx={{ mt: 0.5, mr: 0.4 }}
-              />
-            ))}
+            {props.post.skill &&
+              JSON.parse(props.post.skill).map((skill: any) => (
+                <Chip
+                  variant="outlined"
+                  color="success"
+                  size="small"
+                  label={skill}
+                  sx={{ mt: 0.5, mr: 0.4 }}
+                />
+              ))}
+            {props.post.free_tag &&
+              JSON.parse(props.post.free_tag).map((tag: any) => (
+                <Chip
+                  variant="outlined"
+                  size="small"
+                  label={tag}
+                  sx={{ mt: 0.5, mr: 0.4 }}
+                />
+              ))}
           </Typography>
         </CardContent>
       </CardActionArea>
