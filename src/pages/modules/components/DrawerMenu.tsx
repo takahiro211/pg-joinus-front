@@ -107,8 +107,8 @@ export default function DrawerMenu(props: any) {
             DrawerMenuLabels.DRAWER_MENU_PROJECTS,
             DrawerMenuLabels.DRAWER_MENU_MANAGE_POSTS,
             DrawerMenuLabels.DRAWER_MENU_FAVORITES,
-            DrawerMenuLabels.DRAWER_MENU_COMMENTS,
             DrawerMenuLabels.DRAWER_MENU_FOLLOWER,
+            DrawerMenuLabels.DRAWER_MENU_COMMENTS,
           ].map((text) => getListItem(text))}
         </div>
       </List>
@@ -211,7 +211,7 @@ export default function DrawerMenu(props: any) {
         </ListItem>
       )}
       {item === DrawerMenuLabels.DRAWER_MENU_PROJECTS && (
-        <Link to="projects" style={menuItemLink}>
+        <Link to="/projects/popular" style={menuItemLink}>
           <ListItem key={item} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -247,16 +247,16 @@ export default function DrawerMenu(props: any) {
         </Link>
       )}
       {item === DrawerMenuLabels.DRAWER_MENU_COMMENTS && (
-        <Link to="projects" style={menuItemLink}>
-          <ListItem key={item} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <SmsIcon />
-              </ListItemIcon>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        </Link>
+        // <Link to="/projects/popular" style={menuItemLink}>
+        <ListItem key={item} disablePadding disabled>
+          <ListItemButton disabled>
+            <ListItemIcon>
+              <SmsIcon />
+            </ListItemIcon>
+            <ListItemText primary={item} />
+          </ListItemButton>
+        </ListItem>
+        // </Link>
       )}
       {item === DrawerMenuLabels.DRAWER_MENU_HELP && (
         <Link to="faq" style={menuItemLink}>

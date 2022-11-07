@@ -23,7 +23,7 @@ import { useEffect, useState } from "react";
 
 function ProjectDetailContent(props: any) {
   const isNoData = props.post <= 0;
-  const post = isNoData ? "" : props.post[0][0];
+  const post = isNoData ? "" : props.post[0].data[0];
   const skills = post.skill;
   const freeTags = post.free_tag;
   const isAuthor = isNoData ? false : props.post[1].is_author;

@@ -63,5 +63,13 @@ export default (resource: string) => {
     postProject(postData: CreatePostEntity) {
       return apiRepository.post(resource, { postData });
     },
+    // プロジェクト一覧取得(ページ番号)
+    paginationProjects(page: number) {
+      return apiRepository.get(resource, {
+        params: {
+          page: page,
+        },
+      });
+    },
   };
 };

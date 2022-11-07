@@ -15,6 +15,7 @@ import TagMasterRepository from "./repositories/TagMasterRepository";
 import PostRepository from "./repositories/PostRepository";
 import LatestPostsRepository from "./repositories/LatestPostsRepository";
 import MyPostsRepository from "./repositories/MyPostsRepository";
+import RankRepository from "./repositories/RankRepository";
 
 interface repositoryObject {
   [name: string]: any;
@@ -38,6 +39,7 @@ const repositories: repositoryObject = {
   post: PostRepository,
   latestPosts: LatestPostsRepository,
   myPosts: MyPostsRepository,
+  rank: RankRepository,
 };
 
 export const RepositoryFactory = {

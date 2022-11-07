@@ -85,13 +85,13 @@ function MyPage() {
   };
 
   // API
-  const postsRepository = RepositoryFactory.get("guestPosts");
+  const postsRepository = RepositoryFactory.get("rank");
   const adsRepository = RepositoryFactory.get("ads");
   const userRepository = RepositoryFactory.get("user");
   const userResponse = async () => {
     try {
       const { data: pjData } = await postsRepository.index();
-      setPosts(pjData);
+      setPosts(pjData.data);
       const { data: adsData } = await adsRepository.index();
       setAds(adsData);
       const { data: userData } = await userRepository.index();
@@ -264,7 +264,7 @@ function MyPage() {
                     mb: 4,
                   }}
                 >
-                  <Link to="/projects">もっとみる</Link>
+                  <Link to="/projects/popular">もっとみる</Link>
                 </Box>
               </Box>
             </Grid>

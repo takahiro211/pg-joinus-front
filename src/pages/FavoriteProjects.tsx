@@ -10,23 +10,41 @@ import { RepositoryFactory } from "../api/RepositoryFactory";
 import ProjectCard from "./modules/components/ProjectCard";
 import MyPageSkeleton from "./modules/skeleton/MyPageSkeleton";
 import Stack from "@mui/material/Stack";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 function FavoriteProjects() {
   const [favorites, setFavorites] = React.useState<PostsEntity[]>([]);
+  const [page, setPage] = React.useState(1);
+  const [totalPageCount, setTotalPageCount] = React.useState(0);
+  const [searchParams] = useSearchParams();
+  const paramPageNum: number = searchParams.get("page")
+    ? Number(searchParams.get("page"))
+    : 0;
+  const navigate = useNavigate();
 
   React.useEffect(() => {
-    favoritesResponse();
+    favoritesResponse(paramPageNum);
   }, []);
 
   // API
   const favoritesRepository = RepositoryFactory.get("favoriteList");
-  const favoritesResponse = async () => {
+  const favoritesResponse = async (argPageNum: number) => {
     try {
-      const { data: favData } = await favoritesRepository.index();
-      setFavorites(favData);
+      const { data: favData } = await favoritesRepository.paginationProjects(
+        argPageNum
+      );
+      setFavorites(favData.data);
+      setTotalPageCount(favData.last_page);
+      setPage(favData.current_page);
     } catch (e) {
       console.log("プロジェクトの一覧を取得できませんでした。");
     }
+  };
+
+  const handlePageCange = (page: number) => {
+    navigate("/favorites?page=" + page);
+    favoritesResponse(page);
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -68,9 +86,10 @@ function FavoriteProjects() {
             >
               <Stack alignItems="center">
                 <Pagination
-                  count={3}
+                  count={totalPageCount}
                   color="secondary"
-                  style={{ textAlign: "center" }}
+                  onChange={(e, page) => handlePageCange(page)}
+                  page={page}
                 />
               </Stack>
             </Box>

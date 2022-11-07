@@ -4,7 +4,7 @@ export const AppStrings = {
 
 export const DrawerMenuLabels = {
   DRAWER_MENU_MYPAGE: "マイページ",
-  DRAWER_MENU_PROJECTS: "新着プロジェクト",
+  DRAWER_MENU_PROJECTS: "プロジェクトを探す",
   DRAWER_MENU_MANAGE_POSTS: "投稿の管理",
   DRAWER_MENU_FAVORITES: "お気に入り",
   DRAWER_MENU_COMMENTS: "コメント管理",
@@ -93,4 +93,9 @@ export const FormItems = {
 export const ErrorMessages = {
   VALIDATION_ERROR_REQUIRED_ITEM: "入力必須項目です。",
   VALIDATION_ERROR_EMAIL: "メールアドレスの形式ではありません。",
+};
+
+export const ProjectsListScreenType = {
+  POPULAR: "popular",
+  LATEST: "latest",
 };

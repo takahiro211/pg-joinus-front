@@ -9,7 +9,7 @@ import Button from "./modules/components/Button";
 import { PostsEntity } from "../api/entities/response/PostsEntity";
 import { RepositoryFactory } from "../api/RepositoryFactory";
 import ProjectCard from "./modules/components/ProjectCard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import MyPageSkeleton from "./modules/skeleton/MyPageSkeleton";
 import { hideUnderline } from "../utils/Styles";
 import PostAddIcon from "@mui/icons-material/PostAdd";
@@ -17,20 +17,37 @@ import Stack from "@mui/material/Stack";
 
 function MyPosts() {
   const [posts, setPosts] = React.useState<PostsEntity[]>([]);
+  const [page, setPage] = React.useState(1);
+  const [totalPageCount, setTotalPageCount] = React.useState(0);
+  const [searchParams] = useSearchParams();
+  const paramPageNum: number = searchParams.get("page")
+    ? Number(searchParams.get("page"))
+    : 0;
+  const navigate = useNavigate();
 
   React.useEffect(() => {
-    postsResponse();
+    postsResponse(paramPageNum);
   }, []);
 
   // API
   const postsRepository = RepositoryFactory.get("myPosts");
-  const postsResponse = async () => {
+  const postsResponse = async (argPageNum: number) => {
     try {
-      const { data: pjData } = await postsRepository.index();
-      setPosts(pjData);
+      const { data: pjData } = await postsRepository.paginationProjects(
+        argPageNum
+      );
+      setPosts(pjData.data);
+      setTotalPageCount(pjData.last_page);
+      setPage(pjData.current_page);
     } catch (e) {
       console.log("プロジェクトの一覧を取得できませんでした。");
     }
+  };
+
+  const handlePageCange = (page: number) => {
+    navigate("/my-posts?page=" + page);
+    postsResponse(page);
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -85,9 +102,10 @@ function MyPosts() {
             >
               <Stack alignItems="center">
                 <Pagination
-                  count={3}
+                  count={totalPageCount}
                   color="secondary"
-                  style={{ textAlign: "center" }}
+                  onChange={(e, page) => handlePageCange(page)}
+                  page={page}
                 />
               </Stack>
             </Box>

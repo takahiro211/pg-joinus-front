@@ -14,9 +14,9 @@ function ProjectCard(props: any) {
       sx={{ minWidth: 10, mt: 2, mb: 2 }}
       style={{ marginRight: 12, marginLeft: 12 }}
     >
-      <CardActionArea component={Link} to={"/projects/" + props.post.id}>
+      <CardActionArea component={Link} to={"/project/detail/" + props.post.id}>
         <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
             {DateFormat(props.post.created_at)}
           </Typography>
           <Typography variant="h5" component="div">

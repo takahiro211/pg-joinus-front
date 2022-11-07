@@ -79,7 +79,7 @@ function AllRoute() {
         }
       />
       <Route
-        path="projects"
+        path="/projects/:screenType"
         element={
           <CheckAuth>
             <Projects />
@@ -87,7 +87,7 @@ function AllRoute() {
         }
       />
       <Route
-        path="projects/:postId"
+        path="project/detail/:postId"
         element={
           <CheckAuth>
             <ProjectDetail />
