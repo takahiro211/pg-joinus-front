@@ -48,7 +48,8 @@ export const Labels = {
   USERS_TABEL_HEAD_USER_NAME: "ユーザー名",
   USERS_TABEL_HEAD_POST_TITLE: "タイトル",
   USERS_TABEL_HEAD_POST_DESCRIPTION: "プロジェクトの概要",
-  USERS_TABEL_HEAD_USER_EST: "登録日",
+  USERS_TABEL_HEAD_USER_EST: "フォローした日",
+  USERS_TABEL_HEAD_USER_EST_FOLLOWER: "フォローされた日",
   USERS_TABEL_HEAD_POST_DATE: "投稿日",
   MY_PAGE: "マイページ",
   SKILLS: "スキル",
@@ -98,4 +99,6 @@ export const ErrorMessages = {
 export const ProjectsListScreenType = {
   POPULAR: "popular",
   LATEST: "latest",
+  FOLLOWING: "following",
+  FOLLOWER: "follower",
 };

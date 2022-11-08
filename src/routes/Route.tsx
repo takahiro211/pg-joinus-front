@@ -16,8 +16,8 @@ import Faq from "../pages/Faq";
 import MyPosts from "../pages/MyPosts";
 import Developer from "../pages/Developer";
 import Post from "../pages/Post";
-import UserInformation from "../pages/UserInformation";
 import FavoriteProjects from "../pages/FavoriteProjects";
+import UserPosts from "../pages/UserPosts";
 
 function AllRoute() {
   const location = useLocation();
@@ -71,7 +71,7 @@ function AllRoute() {
         }
       />
       <Route
-        path="users"
+        path="/users/:screenType"
         element={
           <CheckAuth>
             <Users />
@@ -103,6 +103,14 @@ function AllRoute() {
         }
       />
       <Route
+        path="user-posts/:userId"
+        element={
+          <CheckAuth>
+            <UserPosts />
+          </CheckAuth>
+        }
+      />
+      <Route
         path="favorites"
         element={
           <CheckAuth>
@@ -115,14 +123,6 @@ function AllRoute() {
         element={
           <CheckAuth>
             <Post />
-          </CheckAuth>
-        }
-      />
-      <Route
-        path="user/:userId"
-        element={
-          <CheckAuth>
-            <UserInformation />
           </CheckAuth>
         }
       />

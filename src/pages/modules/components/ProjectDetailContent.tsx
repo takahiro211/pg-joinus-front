@@ -7,6 +7,7 @@ import {
   Divider,
   Link,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { Container } from "@mui/system";
@@ -20,6 +21,8 @@ import Button from "./Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { RepositoryFactory } from "../../../api/RepositoryFactory";
 import { useEffect, useState } from "react";
+import FaceIcon from "@mui/icons-material/Face";
+import { useNavigate } from "react-router-dom";
 
 function ProjectDetailContent(props: any) {
   const isNoData = props.post <= 0;
@@ -28,6 +31,7 @@ function ProjectDetailContent(props: any) {
   const freeTags = post.free_tag;
   const isAuthor = isNoData ? false : props.post[1].is_author;
   const [stateIsFavorite, setIsFavorite] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsFavorite(isNoData ? false : props.post[2].is_favorite);
@@ -40,6 +44,10 @@ function ProjectDetailContent(props: any) {
 
   const handleFavorite = () => {
     favoriteResponse();
+  };
+
+  const handleUserPosts = () => {
+    navigate("/user-posts/" + post.author);
   };
 
   // API お気に入り登録処理
@@ -118,6 +126,22 @@ function ProjectDetailContent(props: any) {
           sx={{ mb: 1.5, mt: 3 }}
           color="text.secondary"
         >
+          {isNoData ? (
+            ""
+          ) : (
+            <Tooltip
+              title="ユーザーの投稿一覧"
+              placement="top"
+              sx={{ mr: 1, mb: 1 }}
+            >
+              <Chip
+                label={post.name}
+                icon={<FaceIcon />}
+                clickable
+                onClick={handleUserPosts}
+              />
+            </Tooltip>
+          )}
           {isNoData ? <ProjectDetailSkeleton /> : post.description}
         </Typography>
         <Typography variant="body2" sx={{ mt: 2 }}>

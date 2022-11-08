@@ -155,7 +155,7 @@ export default function DrawerMenu(props: any) {
         </Link>
       )}
       {item === DrawerMenuLabels.DRAWER_MENU_FOLLOWER && (
-        <Link to="users" style={menuItemLink}>
+        <Link to="/users/following" style={menuItemLink}>
           <ListItem key={item} disablePadding>
             <ListItemButton>
               <ListItemIcon>

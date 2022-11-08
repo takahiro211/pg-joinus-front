@@ -9,4 +9,5 @@ export type PostsEntity = {
   free_tag: string;
   created_at: Date;
   updated_at: Date;
+  name: string;
 };

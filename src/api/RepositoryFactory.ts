@@ -16,6 +16,11 @@ import PostRepository from "./repositories/PostRepository";
 import LatestPostsRepository from "./repositories/LatestPostsRepository";
 import MyPostsRepository from "./repositories/MyPostsRepository";
 import RankRepository from "./repositories/RankRepository";
+import FollowingRepository from "./repositories/FollowingRepository";
+import FollowerRepository from "./repositories/FollowerRepository";
+import FollowRepository from "./repositories/FollowRepository";
+import RemoveRepository from "./repositories/RemoveRepository";
+import UserPostsRepository from "./repositories/UserPostsRepository";
 
 interface repositoryObject {
   [name: string]: any;
@@ -40,6 +45,11 @@ const repositories: repositoryObject = {
   latestPosts: LatestPostsRepository,
   myPosts: MyPostsRepository,
   rank: RankRepository,
+  following: FollowingRepository,
+  follower: FollowerRepository,
+  follow: FollowRepository,
+  remove: RemoveRepository,
+  userPosts: UserPostsRepository,
 };
 
 export const RepositoryFactory = {

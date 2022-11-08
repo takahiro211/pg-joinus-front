@@ -1,6 +1,7 @@
 import {
   Box,
   Container,
+  Hidden,
   Tab,
   Tabs,
   tabsClasses,
@@ -71,7 +72,10 @@ function Projects() {
 
   return (
     <React.Fragment>
-      <Box sx={{ mt: 7, mb: 12 }}>
+      <Hidden mdDown>
+        <Box sx={{ mt: 7 }} />
+      </Hidden>
+      <Box sx={{ mb: 12 }}>
         <Container>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs
