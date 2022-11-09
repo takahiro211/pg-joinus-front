@@ -105,7 +105,7 @@ function ProductHowItWorks() {
           </Grid>
         </div>
         <Box sx={{ mt: 8 }}>
-          <Link to="/projects" style={hideUnderline}>
+          <Link to="/projects/latest" style={hideUnderline}>
             <Button color="secondary" size="large" variant="contained">
               {FlowOfJoin.FIND_PROJECT}
             </Button>

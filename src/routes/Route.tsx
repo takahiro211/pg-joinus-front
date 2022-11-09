@@ -19,11 +19,14 @@ import Post from "../pages/Post";
 import FavoriteProjects from "../pages/FavoriteProjects";
 import UserPosts from "../pages/UserPosts";
 import PostEdit from "../pages/PostEdit";
+import Error404 from "../pages/errors/Error404";
 
 function AllRoute() {
   const location = useLocation();
   return (
     <Routes location={location} key={location.pathname}>
+      // --- 404 ---
+      <Route path="*" element={<Error404 />} />
       // --- BOTH ---
       <Route path="terms" element={<Terms />} />
       <Route path="privacy" element={<Privacy />} />
