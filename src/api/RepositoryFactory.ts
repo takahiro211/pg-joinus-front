@@ -21,6 +21,8 @@ import FollowerRepository from "./repositories/FollowerRepository";
 import FollowRepository from "./repositories/FollowRepository";
 import RemoveRepository from "./repositories/RemoveRepository";
 import UserPostsRepository from "./repositories/UserPostsRepository";
+import EditRepository from "./repositories/EditRepository";
+import DeleteRepository from "./repositories/DeleteRepository";
 
 interface repositoryObject {
   [name: string]: any;
@@ -42,6 +44,8 @@ const repositories: repositoryObject = {
   nameEdit: NameEditRepository,
   tagMaster: TagMasterRepository,
   post: PostRepository,
+  edit: EditRepository,
+  delete: DeleteRepository,
   latestPosts: LatestPostsRepository,
   myPosts: MyPostsRepository,
   rank: RankRepository,

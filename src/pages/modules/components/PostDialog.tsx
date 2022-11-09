@@ -12,10 +12,11 @@ export type PostDialogProps = {
   onClose: (value: string) => void;
   title?: string;
   message?: string;
+  mode?: string;
 };
 
 export function PostDialog(props: PostDialogProps) {
-  const { onClose, title, message } = props;
+  const { onClose, title, message, mode } = props;
 
   return (
     <Dialog open onClose={() => onClose("close")}>
@@ -40,7 +41,7 @@ export function PostDialog(props: PostDialogProps) {
             variant="contained"
             onClick={() => onClose("ok")}
           >
-            投稿する
+            {mode}する
           </Button>
         </DialogActions>
       </Box>

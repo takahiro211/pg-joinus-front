@@ -18,9 +18,11 @@ import {
   TooltipProps,
   tooltipClasses,
   Typography,
+  Hidden,
+  Stack,
 } from "@mui/material";
 import { RepositoryFactory } from "../api/RepositoryFactory";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import ComponentsTypography from "./modules/components/Typography";
 import { Field, Form, FormSpy } from "react-final-form";
@@ -33,8 +35,14 @@ import { CreatePostEntity } from "../api/entities/request/CreatePostEntity";
 import FormFeedback from "./modules/form/FormFeedback";
 import { isDirty } from "./modules/form/validation";
 import { PostDialog, PostDialogProps } from "./modules/components/PostDialog";
+import { PostsEntity } from "../api/entities/response/PostsEntity";
+import Button from "./modules/components/Button";
 
-function Post() {
+interface State {
+  post: PostsEntity;
+}
+
+function PostEdit() {
   const [tags, setTags] = React.useState<TagMasterEntity[]>([]);
   const [sent, setSent] = React.useState(false);
   const [isAbleSend, setIsAbleSend] = React.useState(false);
@@ -42,6 +50,43 @@ function Post() {
   const [modalConfig, setModalConfig] = React.useState<
     PostDialogProps | undefined
   >();
+  const { postId } = useParams();
+
+  // 受け取り
+  const location = useLocation();
+  let post: PostsEntity = {
+    title: "",
+    id: 0,
+    description: "",
+    detail: "",
+    url: "",
+    author: 0,
+    skill: "",
+    free_tag: "",
+    created_at: new Date(),
+    updated_at: new Date(),
+    name: "",
+  };
+  if (location.state == null) {
+    navigate("/project/detail/" + postId);
+  } else {
+    const { post: argPost } = location.state as State;
+    post = argPost;
+  }
+
+  const validSkills = post.skill
+    .replaceAll('"', "")
+    .replaceAll(" ", "")
+    .replace("[", "")
+    .replace("]", "")
+    .split(",");
+  const skills = validSkills[0] == "未選択" ? [] : validSkills;
+
+  const validfreeTags = post.free_tag
+    .replaceAll('", "', ",")
+    .replace('["', "")
+    .replace('"]', "");
+  const freeTags = validfreeTags == "未選択" ? "" : validfreeTags;
 
   React.useEffect(() => {
     tagMasterResponse();
@@ -100,6 +145,7 @@ function Post() {
 
   // 投稿処理
   const handleSave = async (values: {
+    id: string | undefined;
     title: string | undefined;
     description: string | undefined;
     skill: string | undefined;
@@ -115,9 +161,9 @@ function Post() {
     const ret = await new Promise<string>((resolve) => {
       setModalConfig({
         onClose: resolve,
-        title: "投稿します",
+        title: "内容を更新します",
         message: "よろしいですか？",
-        mode: "投稿",
+        mode: "更新",
       });
     });
     setModalConfig(undefined);
@@ -128,6 +174,8 @@ function Post() {
       const value = Object.entries(values).map((x) => x);
       console.log(value);
       let requestEntity: CreatePostEntity = new CreatePostEntity();
+      // id
+      requestEntity.id = post.id;
       // タイトル
       requestEntity.title = values.title;
       // 概要
@@ -146,7 +194,7 @@ function Post() {
       console.log(postId);
     }
   };
-  const postRepository = RepositoryFactory.get("post");
+  const postRepository = RepositoryFactory.get("edit");
   console.log(postRepository);
   const postResponse = async (requestEntity: CreatePostEntity) => {
     try {
@@ -155,7 +203,7 @@ function Post() {
       // プロジェクト詳細画面へリダイレクト
       navigate("/my-posts");
     } catch (e) {
-      console.log("プロジェクトの投稿に失敗しました。");
+      console.log("プロジェクトの更新に失敗しました。");
     }
   };
 
@@ -167,7 +215,7 @@ function Post() {
           : theme.typography.fontWeightMedium,
     };
   }
-  const [tagName, setTagName] = React.useState<string[]>([]);
+  const [tagName, setTagName] = React.useState<string[]>(skills);
 
   const handleChange = (event: SelectChangeEvent<typeof tagName>) => {
     const {
@@ -189,6 +237,45 @@ function Post() {
     },
   };
 
+  // API 投稿削除処理
+  const deleteRepository = RepositoryFactory.get("delete");
+  const deleteResponse = async (requestEntity: CreatePostEntity) => {
+    try {
+      const favoriteResponse = await deleteRepository.postProject(
+        requestEntity
+      );
+      // プロジェクト詳細画面へリダイレクト
+      navigate("/my-posts");
+    } catch (e) {}
+  };
+
+  // 削除処理
+  const handleDelete = async () => {
+    console.log("delete button");
+    // ダイアログ
+    const ret = await new Promise<string>((resolve) => {
+      setModalConfig({
+        onClose: resolve,
+        title: "投稿を削除します",
+        message: "この操作は元に戻せません。よろしいですか？",
+        mode: "削除",
+      });
+    });
+    setModalConfig(undefined);
+
+    // 投稿処理
+    if (ret === "ok") {
+      setSent(true);
+      let requestEntity: CreatePostEntity = new CreatePostEntity();
+      // id
+      requestEntity.id = post.id;
+
+      // 削除処理API
+      const postId = deleteResponse(requestEntity);
+      console.log(postId);
+    }
+  };
+
   return (
     <React.Fragment>
       <ComponentsTypography
@@ -198,10 +285,21 @@ function Post() {
         align="center"
         sx={{ mt: 7 }}
       >
-        プロジェクトを投稿
+        プロジェクト編集
       </ComponentsTypography>
       <Box sx={{ mt: 4, mb: 12 }}>
         <Container>
+          <Stack direction="row" justifyContent="flex-end">
+            <Button
+              size="small"
+              color="primary"
+              variant="contained"
+              sx={{ mr: 3, mb: 1 }}
+              onClick={handleDelete}
+            >
+              投稿を削除する
+            </Button>
+          </Stack>
           <Box
             component={Paper}
             elevation={0}
@@ -229,6 +327,7 @@ function Post() {
                       size="medium"
                       sx={{ mt: 1, mb: 1 }}
                       disabled={submitting || sent}
+                      defaultValue={post.title}
                     />
                     <Typography sx={{ ml: 1, mt: 2 }}>概要</Typography>
                     <Field
@@ -240,6 +339,7 @@ function Post() {
                       size="medium"
                       sx={{ mt: 1, mb: 1 }}
                       disabled={submitting || sent}
+                      defaultValue={post.description}
                     />
                     <Typography sx={{ ml: 1, mt: 2 }}>スキル</Typography>
                     <Box>
@@ -263,6 +363,7 @@ function Post() {
                           </Box>
                         )}
                         MenuProps={MenuProps}
+                        defaultValue={skills}
                       >
                         {tags.map((tag) => (
                           <MenuItem
@@ -300,6 +401,7 @@ function Post() {
                       sx={{ mt: -0.2, mb: 1 }}
                       disabled={submitting || sent}
                       placeholder="急募,未経験者歓迎,レビューします"
+                      defaultValue={freeTags}
                     />
                     <Typography sx={{ ml: 1, mt: 2 }}>詳細</Typography>
                     <Field
@@ -313,6 +415,7 @@ function Post() {
                       size="medium"
                       sx={{ mt: 1, mb: 1 }}
                       disabled={submitting || sent}
+                      defaultValue={post.detail}
                     />
                     <Typography sx={{ ml: 1, mt: 2 }}>リンク</Typography>
                     <Field
@@ -324,6 +427,7 @@ function Post() {
                       size="medium"
                       sx={{ mt: 1, mb: 1 }}
                       disabled={submitting || sent}
+                      defaultValue={post.url}
                     />
                     <Box textAlign="center">
                       <FormSpy subscription={{ submitError: true }}>
@@ -341,10 +445,8 @@ function Post() {
                         color="secondary"
                         variant="contained"
                         disabled={submitting || sent || !isAbleSend}
-                        // onClick={handleConfirmOpen}
                       >
-                        <PostAddIcon sx={{ mr: 2 }} />
-                        投稿する
+                        更新する
                       </FormButton>
                     </Box>
                   </Box>
@@ -369,4 +471,4 @@ const CustomWidthTooltip = styled(({ className, ...props }: TooltipProps) => (
   },
 });
 
-export default withRoot(Post);
+export default withRoot(PostEdit);

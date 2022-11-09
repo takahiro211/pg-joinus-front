@@ -22,7 +22,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { RepositoryFactory } from "../../../api/RepositoryFactory";
 import { useEffect, useState } from "react";
 import FaceIcon from "@mui/icons-material/Face";
-import { useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 function ProjectDetailContent(props: any) {
   const isNoData = props.post <= 0;
@@ -47,7 +47,11 @@ function ProjectDetailContent(props: any) {
   };
 
   const handleUserPosts = () => {
-    navigate("/user-posts/" + post.author);
+    if (isAuthor) {
+      navigate("/my-posts/");
+    } else {
+      navigate("/user-posts/" + post.author);
+    }
   };
 
   // API お気に入り登録処理
@@ -85,6 +89,9 @@ function ProjectDetailContent(props: any) {
           <Box sx={{ mt: 0, mb: 2 }}>
             {isAuthor ? (
               <Button
+                component={RouterLink}
+                to={"/edit/" + post.id}
+                state={{ post: post }}
                 size="small"
                 color="primary"
                 variant="contained"

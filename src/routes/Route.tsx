@@ -18,6 +18,7 @@ import Developer from "../pages/Developer";
 import Post from "../pages/Post";
 import FavoriteProjects from "../pages/FavoriteProjects";
 import UserPosts from "../pages/UserPosts";
+import PostEdit from "../pages/PostEdit";
 
 function AllRoute() {
   const location = useLocation();
@@ -123,6 +124,14 @@ function AllRoute() {
         element={
           <CheckAuth>
             <Post />
+          </CheckAuth>
+        }
+      />
+      <Route
+        path="/edit/:postId"
+        element={
+          <CheckAuth>
+            <PostEdit />
           </CheckAuth>
         }
       />
