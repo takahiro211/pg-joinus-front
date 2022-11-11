@@ -4,6 +4,7 @@ import {
   AccordionSummary,
   Box,
   Container,
+  Hidden,
 } from "@mui/material";
 import * as React from "react";
 import { FaqListEntity } from "../api/entities/response/FaqListEntity";
@@ -37,7 +38,10 @@ function Faq() {
 
   return (
     <React.Fragment>
-      <Box sx={{ mt: 7, mb: 12 }}>
+      <Hidden mdDown>
+        <Box sx={{ mt: 4 }} />
+      </Hidden>
+      <Box sx={{ mb: 12 }}>
         <Container>
           <Typography
             variant="h3"

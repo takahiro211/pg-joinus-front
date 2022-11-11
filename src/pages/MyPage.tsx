@@ -103,7 +103,13 @@ function MyPage() {
 
   return (
     <React.Fragment>
-      <Box sx={{ mt: 7, mb: 12 }}>
+      <Hidden mdDown>
+        <Box sx={{ mt: 7 }} />
+      </Hidden>
+      <Hidden mdUp>
+        <Box sx={{ mt: 2 }} />
+      </Hidden>
+      <Box sx={{ mb: 12 }}>
         <Container>
           <Grid container>
             <Grid xs={12} md={3}>

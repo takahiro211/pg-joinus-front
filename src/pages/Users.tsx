@@ -71,8 +71,8 @@ function Users() {
       <Hidden mdDown>
         <Box sx={{ mt: 7 }} />
       </Hidden>
-      <Box sx={{ mb: 12 }}>
-        <Container>
+      <Box sx={{ mb: 4 }}>
+        <Container fixed>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs
               value={value}

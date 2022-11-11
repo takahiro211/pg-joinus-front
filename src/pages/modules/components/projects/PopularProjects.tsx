@@ -48,6 +48,8 @@ function PopularProjects() {
         sx={{
           p: 1,
           m: 1,
+          mr: -3,
+          ml: -3,
           backgroundColor: "#FCFCFC",
         }}
       >
