@@ -6,7 +6,7 @@ import Button from "../components/Button";
 import Typography from "../components/Typography";
 import ProductHeroLayout from "./ProductHeroLayout";
 
-const backgroundImage = "https://source.unsplash.com/dWYU3i-mqEo";
+const backgroundImage = "/img/dWYU3i-mqEo.jpg";
 
 export default function ProductHero() {
   return (
